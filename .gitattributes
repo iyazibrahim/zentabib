@@ -1,0 +1,16 @@
+* text=auto eol=lf
+
+*.blade.php diff=html
+*.css diff=css
+*.html diff=html
+*.md diff=markdown
+*.php diff=php
+
+# Exclude dev-only files from production archives
+.github export-ignore
+tests export-ignore
+phpunit.xml export-ignore
+.editorconfig export-ignore
+.prettierrc export-ignore
+.prettierignore export-ignore
+eslint.config.js export-ignore
