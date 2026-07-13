@@ -1,36 +1,22 @@
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 import prettier from 'eslint-config-prettier/flat';
-import react from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
-import globals from 'globals';
-import typescript from 'typescript-eslint';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const compat = new FlatCompat({
+    baseDirectory: __dirname,
+    recommendedConfig: js.configs.recommended,
+});
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-    js.configs.recommended,
-    reactHooks.configs.flat.recommended,
-    ...typescript.configs.recommended,
+    ...compat.extends('next/core-web-vitals', 'next/typescript'),
     {
-        ...react.configs.flat.recommended,
-        ...react.configs.flat['jsx-runtime'], // Required for React 17+
-        languageOptions: {
-            globals: {
-                ...globals.browser,
-            },
-        },
-        rules: {
-            'react/react-in-jsx-scope': 'off',
-            'react/prop-types': 'off',
-            'react/no-unescaped-entities': 'off',
-        },
-        settings: {
-            react: {
-                version: 'detect',
-            },
-        },
+        ignores: ['node_modules', '.next', 'out', 'next-env.d.ts'],
     },
-    {
-        ignores: ['vendor', 'node_modules', 'public', 'bootstrap/ssr', 'tailwind.config.js'],
-    },
-    prettier, // Turn off all rules that might conflict with Prettier
+    prettier,
 ];
