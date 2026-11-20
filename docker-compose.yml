@@ -5,7 +5,7 @@ services:
       target: deps
     command: npm run dev
     ports:
-      - '3000:3000'
+      - '3025:3025'
     volumes:
       - .:/app
       - /app/node_modules
@@ -14,10 +14,11 @@ services:
       - ./public/uploads:/app/public/uploads
     environment:
       - NODE_ENV=development
+      - PORT=3025
       - WATCHPACK_POLLING=true
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-change-me}
       - AUTH_SECRET=${AUTH_SECRET:-dev-auth-secret-change-me}
-      - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+      - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL:-http://localhost:3025}
 
   web-prod:
     profiles:
@@ -25,12 +26,13 @@ services:
     build:
       context: .
     ports:
-      - '3000:3000'
+      - '3025:3025'
     volumes:
       - ./data:/app/data
       - ./public/uploads:/app/public/uploads
     environment:
       - NODE_ENV=production
+      - PORT=3025
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - AUTH_SECRET=${AUTH_SECRET}
       - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}

@@ -23,16 +23,16 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3025](http://localhost:3025).
 
-Admin CMS: [http://localhost:3000/admin](http://localhost:3000/admin)
+Admin CMS: [http://localhost:3025/admin](http://localhost:3025/admin)
 
 Set these in `.env`:
 
 ```env
 ADMIN_PASSWORD=change-me
 AUTH_SECRET=replace-with-a-long-random-string
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SITE_URL=http://localhost:3025
 ```
 
 ## Docker
@@ -49,7 +49,7 @@ docker compose up
 docker compose --profile prod up --build
 ```
 
-The app listens on port `3000`. `data/` and `public/uploads/` are volume-mounted so CMS edits and photo uploads survive rebuilds.
+The app listens on port `3025`. `data/` and `public/uploads/` are volume-mounted so CMS edits and photo uploads survive rebuilds.
 
 ## Production deploy
 
@@ -88,9 +88,9 @@ credentials-file: /path/to/<tunnel-uuid>.json
 
 ingress:
   - hostname: your-domain.com
-    service: http://127.0.0.1:3000
+    service: http://127.0.0.1:3025
   - hostname: www.your-domain.com
-    service: http://127.0.0.1:3000
+    service: http://127.0.0.1:3025
   - service: http_status:404
 ```
 

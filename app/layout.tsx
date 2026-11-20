@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3025';
 
 const siteDescription =
     'Zen AI Healthcare harnesses artificial intelligence and next-generation health technology to deliver smart, accessible wellness and diagnostic solutions—built to serve every community fast, anywhere, affordably, and creatively.';
