@@ -1,11 +1,12 @@
-# Zen AI
+# Zen AI Healthcare
 
-Modern healthcare web platform bridging Traditional Complementary Medicine (TCM) with AI technology.
+Advance healthcare solution provider bridging AI, portable diagnostics, and community-first wellness technology.
 
 ## Stack
 
-- **Framework:** Next.js 15 (App Router)
+- **Framework:** Next.js 15 (App Router, standalone Node server)
 - **Frontend:** React 19, TypeScript, Tailwind CSS 4
+- **Content:** File-based CMS (`data/site.json` + `public/uploads`)
 - **Runtime:** Node.js 22
 
 ## Requirements
@@ -17,11 +18,22 @@ Modern healthcare web platform bridging Traditional Complementary Medicine (TCM)
 ## Local development
 
 ```bash
+cp .env.example .env
 npm install
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+Admin CMS: [http://localhost:3000/admin](http://localhost:3000/admin)
+
+Set these in `.env`:
+
+```env
+ADMIN_PASSWORD=change-me
+AUTH_SECRET=replace-with-a-long-random-string
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
 
 ## Docker
 
@@ -37,7 +49,7 @@ docker compose up
 docker compose --profile prod up --build
 ```
 
-The app listens on port `3000`.
+The app listens on port `3000`. `data/` and `public/uploads/` are volume-mounted so CMS edits and photo uploads survive rebuilds.
 
 ## Production deploy
 
@@ -47,11 +59,15 @@ npm run build
 npm run start
 ```
 
-Set environment variables as needed:
+This project uses the Next.js **standalone Node server** (not a static `out/` export), so admin saves and image uploads work at runtime.
+
+Set environment variables:
 
 ```env
 NODE_ENV=production
 NEXT_PUBLIC_SITE_URL=https://your-domain.com
+ADMIN_PASSWORD=your-strong-password
+AUTH_SECRET=your-long-random-secret
 ```
 
 ### Cloudflare Tunnel
@@ -87,9 +103,11 @@ Cloudflare dashboard:
 
 | Path | Purpose |
 |------|---------|
-| `app/` | Next.js App Router pages and layouts |
+| `app/` | Next.js App Router pages, layouts, and API routes |
 | `components/` | Shared React components |
-| `public/zen-ai-logo.png` | Brand logo |
+| `data/site.json` | Editable website content |
+| `public/uploads/` | CMS-uploaded images |
+| `lib/content/` | Content types and store helpers |
 | `docker-compose.yml` | Docker dev and prod profiles |
 
 ## Routes
@@ -97,10 +115,12 @@ Cloudflare dashboard:
 | Route | Page |
 |-------|------|
 | `/` | Home |
-| `/medical-devices` | Medical Devices |
-| `/ai-diagnose-system` | AI Diagnose System |
-| `/zenlive` | ZenLive |
-| `/clinical-services` | Redirects to `/zenlive` |
+| `/services/[slug]` | Core service detail pages |
+| `/admin` | Password-protected CMS |
+| `/ai-diagnose-system` | Redirects to AI Health Screening |
+| `/medical-devices` | Redirects to Cardiopulmonary Image Diagnostic |
+| `/zenlive` | Redirects to Real-Time Health Monitoring |
+| `/clinical-services` | Redirects to Real-Time Health Monitoring |
 
 ## Contact
 

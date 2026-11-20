@@ -21,8 +21,12 @@ RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/data ./data
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+RUN mkdir -p /app/public/uploads/gallery /app/public/uploads/events && \
+    chown -R nextjs:nodejs /app/public/uploads /app/data
 
 USER nextjs
 EXPOSE 3000

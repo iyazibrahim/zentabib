@@ -4,13 +4,13 @@ import './globals.css';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
 const siteDescription =
-    'Zen AI - Bridging Traditional Wisdom with Modern Technology. Medical Devices, ZenLive, AI Diagnosis, Herbal Medicine, and TCM Training.';
+    'Zen AI Healthcare harnesses artificial intelligence and next-generation health technology to deliver smart, accessible wellness and diagnostic solutions—built to serve every community fast, anywhere, affordably, and creatively.';
 
 export const metadata: Metadata = {
     metadataBase: new URL(siteUrl),
     title: {
-        default: 'Zen AI - Modern TCM Solutions',
-        template: '%s | Zen AI',
+        default: 'Zen AI Healthcare - Advance Healthcare Solution Provider',
+        template: '%s | Zen AI Healthcare',
     },
     description: siteDescription,
     icons: {
@@ -19,13 +19,13 @@ export const metadata: Metadata = {
     },
     openGraph: {
         type: 'website',
-        title: 'Zen AI - Modern TCM Solutions',
+        title: 'Zen AI Healthcare - Advance Healthcare Solution Provider',
         description: siteDescription,
         images: ['/zen-ai-logo.png'],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Zen AI - Modern TCM Solutions',
+        title: 'Zen AI Healthcare - Advance Healthcare Solution Provider',
         description: siteDescription,
         images: ['/zen-ai-logo.png'],
     },
