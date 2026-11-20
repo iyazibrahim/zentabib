@@ -37,19 +37,15 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3025
 
 ## Docker
 
-### Development
+One production service only:
 
 ```bash
-docker compose up
+docker compose up --build
 ```
 
-### Production
+The app listens on port `3025` with `NODE_ENV=production` (no Next.js debug badge). `data/` and `public/uploads/` are volume-mounted so CMS edits and photo uploads survive rebuilds.
 
-```bash
-docker compose --profile prod up --build
-```
-
-The app listens on port `3025`. `data/` and `public/uploads/` are volume-mounted so CMS edits and photo uploads survive rebuilds.
+For local coding without Docker, use `npm run dev` on the host.
 
 ## Production deploy
 
@@ -108,7 +104,7 @@ Cloudflare dashboard:
 | `data/site.json` | Editable website content |
 | `public/uploads/` | CMS-uploaded images |
 | `lib/content/` | Content types and store helpers |
-| `docker-compose.yml` | Docker dev and prod profiles |
+| `docker-compose.yml` | Single production Docker service |
 
 ## Routes
 
