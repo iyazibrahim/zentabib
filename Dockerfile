@@ -25,7 +25,7 @@ COPY --from=builder /app/data ./data
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-RUN mkdir -p /app/public/uploads/gallery /app/public/uploads/events && \
+RUN mkdir -p /app/public/uploads/gallery /app/public/uploads/events /app/public/uploads/branding && \
     chown -R nextjs:nodejs /app/public/uploads /app/data
 
 USER nextjs

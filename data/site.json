@@ -1,4 +1,17 @@
 {
+  "brand": {
+    "logoSrc": "/zen-ai-logo.png"
+  },
+  "sections": {
+    "hero": true,
+    "about": true,
+    "philosophy": true,
+    "services": true,
+    "gallery": true,
+    "events": true,
+    "contact": true,
+    "footer": true
+  },
   "seo": {
     "title": "Zen AI Healthcare - Advance Healthcare Solution Provider",
     "description": "Zen AI Healthcare harnesses artificial intelligence and next-generation health technology to deliver smart, accessible wellness and diagnostic solutions—built to serve every community fast, anywhere, affordably, and creatively."
@@ -153,31 +166,9 @@
     {
       "id": "ums-smart-ai-healthcare-2026",
       "title": "UMS Smart AI Healthcare 2026",
-      "subtitle": "Strategic Launching of Advanced Engineering & Technology",
-      "slogan": "From Innovation to Commercialization: AI Healthcare for Every Community.",
       "date": "14 December 2026",
       "venue": "Auditorium HUMS",
-      "schedule": [
-        "Launching Event: 9:00 AM – 12:30 PM",
-        "Exhibition Tour and Live Technology Demonstration: 9:00 AM – 4:00 PM"
-      ],
-      "acronym": "AI-CARE",
-      "acronymMeaning": "Engineering and Artificial Intelligence for Community Access, Research & Excellence",
-      "flagships": [
-        {
-          "title": "AI-Powered General Health Screening & Assessment",
-          "description": "Advancing preventive health and intelligent risk assessment at the primary and community healthcare level."
-        },
-        {
-          "title": "Next-Generation AI-Assisted Cardiopulmonary Screening",
-          "description": "Developing new possibilities for accessible respiratory & cardiovascular health screening and early clinical assessment."
-        },
-        {
-          "title": "Smart AI Healthy Ageing & Elderly Care",
-          "description": "Advancing holistic assessment, connected health monitoring with AI wearables and community-based support for older adults."
-        }
-      ],
-      "organizers": "FKJ / FPSK / HUMS / Zen AI Healthcare Sdn Bhd / JP Dr. Wood Packer / Wuzhen World First Smart AI Hospital",
+      "details": "Strategic Launching of Advanced Engineering & Technology\nFrom Innovation to Commercialization: AI Healthcare for Every Community.\n\nSchedule\nLaunching Event: 9:00 AM – 12:30 PM\nExhibition Tour and Live Technology Demonstration: 9:00 AM – 4:00 PM\n\nAI-CARE\nEngineering and Artificial Intelligence for Community Access, Research & Excellence\n\nThree Flagship Technologies\n• AI-Powered General Health Screening & Assessment — Advancing preventive health and intelligent risk assessment at the primary and community healthcare level.\n• Next-Generation AI-Assisted Cardiopulmonary Screening — Developing new possibilities for accessible respiratory & cardiovascular health screening and early clinical assessment.\n• Smart AI Healthy Ageing & Elderly Care — Advancing holistic assessment, connected health monitoring with AI wearables and community-based support for older adults.\n\nOrganisers: FKJ / FPSK / HUMS / Zen AI Healthcare Sdn Bhd / JP Dr. Wood Packer / Wuzhen World First Smart AI Hospital",
       "posterSrc": "/uploads/events/ums-smart-ai-healthcare-2026.jpg",
       "visible": true,
       "featured": true

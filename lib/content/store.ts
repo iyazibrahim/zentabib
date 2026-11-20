@@ -14,6 +14,7 @@ export async function ensureContentDirs() {
     await fs.mkdir(DATA_DIR, { recursive: true });
     await fs.mkdir(path.join(UPLOADS_DIR, 'gallery'), { recursive: true });
     await fs.mkdir(path.join(UPLOADS_DIR, 'events'), { recursive: true });
+    await fs.mkdir(path.join(UPLOADS_DIR, 'branding'), { recursive: true });
 }
 
 export async function getSiteContent(): Promise<SiteContent> {

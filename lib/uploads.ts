@@ -10,7 +10,9 @@ const ALLOWED_TYPES: Record<string, string> = {
     'image/gif': '.gif',
 };
 
-export async function saveUploadedImage(file: File, folder: 'gallery' | 'events') {
+export type UploadFolder = 'gallery' | 'events' | 'branding';
+
+export async function saveUploadedImage(file: File, folder: UploadFolder) {
     const extension = ALLOWED_TYPES[file.type];
     if (!extension) {
         throw new Error('Unsupported image type. Use JPG, PNG, WEBP, or GIF.');

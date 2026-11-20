@@ -34,7 +34,7 @@ export default async function ServicePage({ params }: PageProps) {
 
     return (
         <div className="min-h-screen bg-stone-50 font-sans text-stone-800">
-            <PublicPageNav />
+            <PublicPageNav logoSrc={content.brand?.logoSrc ?? '/zen-ai-logo.png'} />
 
             <main className="pt-32 pb-20">
                 <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">

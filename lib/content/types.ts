@@ -32,29 +32,33 @@ export type GalleryAlbum = {
     photos: GalleryPhoto[];
 };
 
-export type EventFlagship = {
-    title: string;
-    description: string;
-};
-
 export type SiteEvent = {
     id: string;
     title: string;
-    subtitle: string;
-    slogan: string;
     date: string;
     venue: string;
-    schedule: string[];
-    acronym: string;
-    acronymMeaning: string;
-    flagships: EventFlagship[];
-    organizers: string;
+    details: string;
     posterSrc: string;
     visible: boolean;
     featured: boolean;
 };
 
+export type SectionVisibility = {
+    hero: boolean;
+    about: boolean;
+    philosophy: boolean;
+    services: boolean;
+    gallery: boolean;
+    events: boolean;
+    contact: boolean;
+    footer: boolean;
+};
+
 export type SiteContent = {
+    brand: {
+        logoSrc: string;
+    };
+    sections: SectionVisibility;
     seo: {
         title: string;
         description: string;
