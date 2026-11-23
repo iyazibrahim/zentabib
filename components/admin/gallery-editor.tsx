@@ -1,11 +1,23 @@
 'use client';
 
 import { randomUUID } from '@/lib/client-id';
-import type { GalleryAlbum, SiteContent } from '@/lib/content/types';
-import { ArrowLeft, FolderPlus, Trash2 } from 'lucide-react';
+import type { GalleryAlbum, GalleryPhoto, SiteContent } from '@/lib/content/types';
+import { ArrowLeft, FolderPlus, Pencil, Trash2 } from 'lucide-react';
 import { useState } from 'react';
+import AdminModal from './admin-modal';
 import { Field, SectionCard } from './fields';
 import ImageDropzone from './image-dropzone';
+
+type AlbumDraft = {
+    id: string;
+    title: string;
+    order: number;
+};
+
+type PhotoDraft = {
+    id: string;
+    caption: string;
+};
 
 export default function GalleryEditor({
     content,
@@ -21,6 +33,10 @@ export default function GalleryEditor({
     onError: (message: string) => void;
 }) {
     const [openAlbumId, setOpenAlbumId] = useState<string | null>(null);
+    const [albumDraft, setAlbumDraft] = useState<AlbumDraft | null>(null);
+    const [albumMode, setAlbumMode] = useState<'create' | 'edit' | null>(null);
+    const [photoDraft, setPhotoDraft] = useState<PhotoDraft | null>(null);
+
     const albums = [...content.gallery.albums].sort((a, b) => a.order - b.order);
     const openAlbum = albums.find((album) => album.id === openAlbumId) ?? null;
 
@@ -39,20 +55,58 @@ export default function GalleryEditor({
         );
     }
 
-    function addAlbum() {
+    function openCreateAlbum() {
         const nextOrder =
             content.gallery.albums.reduce((max, album) => Math.max(max, album.order), 0) + 1;
-        const id = randomUUID();
-        updateAlbums([
-            ...content.gallery.albums,
-            {
-                id,
-                title: 'New album',
-                order: nextOrder,
-                photos: [],
-            },
-        ]);
-        setOpenAlbumId(id);
+        setAlbumDraft({
+            id: randomUUID(),
+            title: 'New album',
+            order: nextOrder,
+        });
+        setAlbumMode('create');
+    }
+
+    function openEditAlbum(album: GalleryAlbum) {
+        setAlbumDraft({
+            id: album.id,
+            title: album.title,
+            order: album.order,
+        });
+        setAlbumMode('edit');
+    }
+
+    function closeAlbumModal() {
+        setAlbumDraft(null);
+        setAlbumMode(null);
+    }
+
+    function applyAlbumDraft() {
+        if (!albumDraft || !albumMode) {
+            return;
+        }
+
+        const title = albumDraft.title.trim() || 'Untitled album';
+
+        if (albumMode === 'create') {
+            updateAlbums([
+                ...content.gallery.albums,
+                {
+                    id: albumDraft.id,
+                    title,
+                    order: albumDraft.order,
+                    photos: [],
+                },
+            ]);
+            setOpenAlbumId(albumDraft.id);
+        } else {
+            updateAlbum(albumDraft.id, (item) => ({
+                ...item,
+                title,
+                order: albumDraft.order,
+            }));
+        }
+
+        closeAlbumModal();
     }
 
     function deleteAlbum(albumId: string) {
@@ -63,6 +117,30 @@ export default function GalleryEditor({
         if (openAlbumId === albumId) {
             setOpenAlbumId(null);
         }
+    }
+
+    function openEditPhoto(photo: GalleryPhoto) {
+        setPhotoDraft({ id: photo.id, caption: photo.caption });
+    }
+
+    function closePhotoModal() {
+        setPhotoDraft(null);
+    }
+
+    function applyPhotoDraft() {
+        if (!photoDraft || !openAlbum) {
+            return;
+        }
+
+        updateAlbum(openAlbum.id, (item) => ({
+            ...item,
+            photos: item.photos.map((entry) =>
+                entry.id === photoDraft.id
+                    ? { ...entry, caption: photoDraft.caption }
+                    : entry,
+            ),
+        }));
+        closePhotoModal();
     }
 
     if (openAlbum) {
@@ -79,27 +157,20 @@ export default function GalleryEditor({
                     Back to albums
                 </button>
 
-                <SectionCard title={openAlbum.title || 'Album'} place="Album photos">
-                    <Field
-                        label="Album title"
-                        hint="Filter name"
-                        value={openAlbum.title}
-                        onChange={(title) =>
-                            updateAlbum(openAlbum.id, (item) => ({ ...item, title }))
-                        }
-                    />
-                    <Field
-                        label="Order"
-                        hint="List position"
-                        value={String(openAlbum.order)}
-                        onChange={(order) =>
-                            updateAlbum(openAlbum.id, (item) => ({
-                                ...item,
-                                order: Number(order) || 0,
-                            }))
-                        }
-                    />
-
+                <SectionCard
+                    title={openAlbum.title || 'Album'}
+                    place="Album photos"
+                    action={
+                        <button
+                            type="button"
+                            onClick={() => openEditAlbum(openAlbum)}
+                            className="inline-flex items-center gap-1.5 rounded-xl border border-stone-200 px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50"
+                        >
+                            <Pencil className="h-3.5 w-3.5" />
+                            Edit album
+                        </button>
+                    }
+                >
                     <ImageDropzone
                         label="Drop photos here"
                         onFile={async (file) => {
@@ -129,44 +200,88 @@ export default function GalleryEditor({
                                         className="h-40 w-full object-cover"
                                     />
                                     <div className="space-y-2 p-3">
-                                        <Field
-                                            label="Caption"
-                                            hint="Under the photo"
-                                            value={photo.caption}
-                                            onChange={(caption) =>
-                                                updateAlbum(openAlbum.id, (item) => ({
-                                                    ...item,
-                                                    photos: item.photos.map((entry) =>
-                                                        entry.id === photo.id
-                                                            ? { ...entry, caption }
-                                                            : entry,
-                                                    ),
-                                                }))
-                                            }
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={() =>
-                                                void onDeletePhoto(openAlbum.id, photo.id).catch(
-                                                    (err) =>
-                                                        onError(
-                                                            err instanceof Error
-                                                                ? err.message
-                                                                : 'Delete failed',
-                                                        ),
-                                                )
-                                            }
-                                            className="inline-flex items-center gap-2 rounded-lg border border-red-200 px-3 py-1.5 text-sm text-red-600 hover:bg-red-50"
-                                        >
-                                            <Trash2 className="h-3.5 w-3.5" />
-                                            Delete photo
-                                        </button>
+                                        <p className="line-clamp-2 text-sm text-stone-600">
+                                            {photo.caption || 'No caption'}
+                                        </p>
+                                        <div className="flex flex-wrap gap-2">
+                                            <button
+                                                type="button"
+                                                onClick={() => openEditPhoto(photo)}
+                                                className="inline-flex items-center gap-1.5 rounded-lg border border-stone-200 px-3 py-1.5 text-sm font-medium text-stone-700 hover:bg-stone-50"
+                                            >
+                                                <Pencil className="h-3.5 w-3.5" />
+                                                Edit caption
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    void onDeletePhoto(openAlbum.id, photo.id).catch(
+                                                        (err) =>
+                                                            onError(
+                                                                err instanceof Error
+                                                                    ? err.message
+                                                                    : 'Delete failed',
+                                                            ),
+                                                    )
+                                                }
+                                                className="inline-flex items-center gap-1.5 rounded-lg border border-red-200 px-3 py-1.5 text-sm text-red-600 hover:bg-red-50"
+                                            >
+                                                <Trash2 className="h-3.5 w-3.5" />
+                                                Delete
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     )}
                 </SectionCard>
+
+                <AdminModal
+                    open={Boolean(albumDraft && albumMode)}
+                    title="Edit album"
+                    onClose={closeAlbumModal}
+                    onApply={applyAlbumDraft}
+                >
+                    {albumDraft ? (
+                        <>
+                            <Field
+                                label="Album title"
+                                hint="Filter name"
+                                value={albumDraft.title}
+                                onChange={(title) => setAlbumDraft({ ...albumDraft, title })}
+                            />
+                            <Field
+                                label="Order"
+                                hint="List position"
+                                value={String(albumDraft.order)}
+                                onChange={(order) =>
+                                    setAlbumDraft({
+                                        ...albumDraft,
+                                        order: Number(order) || 0,
+                                    })
+                                }
+                            />
+                        </>
+                    ) : null}
+                </AdminModal>
+
+                <AdminModal
+                    open={Boolean(photoDraft)}
+                    title="Edit caption"
+                    onClose={closePhotoModal}
+                    onApply={applyPhotoDraft}
+                >
+                    {photoDraft ? (
+                        <Field
+                            label="Caption"
+                            hint="Under the photo"
+                            value={photoDraft.caption}
+                            multiline
+                            onChange={(caption) => setPhotoDraft({ ...photoDraft, caption })}
+                        />
+                    ) : null}
+                </AdminModal>
             </div>
         );
     }
@@ -179,7 +294,7 @@ export default function GalleryEditor({
                 action={
                     <button
                         type="button"
-                        onClick={addAlbum}
+                        onClick={openCreateAlbum}
                         className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700"
                     >
                         <FolderPlus className="h-4 w-4" />
@@ -222,7 +337,7 @@ export default function GalleryEditor({
                                 <p className="font-semibold text-stone-900">{album.title}</p>
                                 <p className="text-xs text-stone-500">
                                     {album.photos.length} photo
-                                    {album.photos.length === 1 ? '' : 's'}
+                                    {album.photos.length === 1 ? '' : 's'} · order {album.order}
                                 </p>
                             </div>
                             <div className="flex flex-wrap gap-2">
@@ -232,6 +347,14 @@ export default function GalleryEditor({
                                     className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
                                 >
                                     Open
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => openEditAlbum(album)}
+                                    className="inline-flex items-center gap-1.5 rounded-xl border border-stone-200 px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50"
+                                >
+                                    <Pencil className="h-3.5 w-3.5" />
+                                    Edit
                                 </button>
                                 <button
                                     type="button"
@@ -245,6 +368,35 @@ export default function GalleryEditor({
                     ))
                 )}
             </div>
+
+            <AdminModal
+                open={Boolean(albumDraft && albumMode)}
+                title={albumMode === 'create' ? 'Add album' : 'Edit album'}
+                onClose={closeAlbumModal}
+                onApply={applyAlbumDraft}
+            >
+                {albumDraft ? (
+                    <>
+                        <Field
+                            label="Album title"
+                            hint="Filter name"
+                            value={albumDraft.title}
+                            onChange={(title) => setAlbumDraft({ ...albumDraft, title })}
+                        />
+                        <Field
+                            label="Order"
+                            hint="List position"
+                            value={String(albumDraft.order)}
+                            onChange={(order) =>
+                                setAlbumDraft({
+                                    ...albumDraft,
+                                    order: Number(order) || 0,
+                                })
+                            }
+                        />
+                    </>
+                ) : null}
+            </AdminModal>
         </div>
     );
 }

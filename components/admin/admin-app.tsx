@@ -3,6 +3,8 @@
 import type { SiteContent } from '@/lib/content/types';
 import {
     CalendarDays,
+    Eye,
+    EyeOff,
     Images,
     LayoutTemplate,
     Sparkles,
@@ -11,6 +13,7 @@ import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import EventsEditor from './events-editor';
 import GalleryEditor from './gallery-editor';
+import LiveSitePreview from './live-site-preview';
 import ServicesEditor from './services-editor';
 import SiteEditor from './site-editor';
 
@@ -23,6 +26,7 @@ export default function AdminApp() {
     const [content, setContent] = useState<SiteContent | null>(null);
     const [savedSnapshot, setSavedSnapshot] = useState('');
     const [tab, setTab] = useState<Tab>('site');
+    const [previewOn, setPreviewOn] = useState(true);
     const [status, setStatus] = useState('');
     const [error, setError] = useState('');
     const [saving, setSaving] = useState(false);
@@ -291,10 +295,42 @@ export default function AdminApp() {
         { id: 'events', label: 'Events', icon: CalendarDays },
     ];
 
+    const editor = (
+        <>
+            {tab === 'site' ? (
+                <SiteEditor
+                    content={content}
+                    onChange={setContent}
+                    onLogoUpload={handleLogoUpload}
+                />
+            ) : null}
+            {tab === 'services' ? (
+                <ServicesEditor content={content} onChange={setContent} />
+            ) : null}
+            {tab === 'gallery' ? (
+                <GalleryEditor
+                    content={content}
+                    onChange={setContent}
+                    onUpload={handleGalleryUpload}
+                    onDeletePhoto={handleDeletePhoto}
+                    onError={setError}
+                />
+            ) : null}
+            {tab === 'events' ? (
+                <EventsEditor
+                    content={content}
+                    onChange={setContent}
+                    onUploadPoster={handleEventPoster}
+                    onError={setError}
+                />
+            ) : null}
+        </>
+    );
+
     return (
         <div className="min-h-screen bg-stone-100 text-stone-800">
             <header className="sticky top-0 z-40 border-b border-stone-200 bg-white/95 backdrop-blur">
-                <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="mx-auto flex max-w-[1600px] flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                         <h1 className="text-xl font-bold text-stone-900">Website CMS</h1>
                         <p className="text-sm text-stone-500">Edit content without code</p>
@@ -305,6 +341,18 @@ export default function AdminApp() {
                                 Unsaved changes
                             </span>
                         ) : null}
+                        <button
+                            type="button"
+                            onClick={() => setPreviewOn((value) => !value)}
+                            className="inline-flex items-center gap-2 rounded-lg border border-stone-200 px-4 py-2 text-sm font-medium hover:bg-stone-50"
+                        >
+                            {previewOn ? (
+                                <EyeOff className="h-4 w-4" />
+                            ) : (
+                                <Eye className="h-4 w-4" />
+                            )}
+                            {previewOn ? 'Hide preview' : 'Show preview'}
+                        </button>
                         <Link
                             href="/"
                             onClick={(event) => {
@@ -342,7 +390,7 @@ export default function AdminApp() {
                 </div>
             </header>
 
-            <div className="mx-auto max-w-6xl px-4 py-6">
+            <div className="mx-auto max-w-[1600px] px-4 py-6">
                 {(status || error) && (
                     <div
                         className={`mb-4 flex items-start justify-between gap-3 rounded-xl px-4 py-3 text-sm ${
@@ -383,33 +431,18 @@ export default function AdminApp() {
                     })}
                 </div>
 
-                {tab === 'site' ? (
-                    <SiteEditor
-                        content={content}
-                        onChange={setContent}
-                        onLogoUpload={handleLogoUpload}
-                    />
-                ) : null}
-                {tab === 'services' ? (
-                    <ServicesEditor content={content} onChange={setContent} />
-                ) : null}
-                {tab === 'gallery' ? (
-                    <GalleryEditor
-                        content={content}
-                        onChange={setContent}
-                        onUpload={handleGalleryUpload}
-                        onDeletePhoto={handleDeletePhoto}
-                        onError={setError}
-                    />
-                ) : null}
-                {tab === 'events' ? (
-                    <EventsEditor
-                        content={content}
-                        onChange={setContent}
-                        onUploadPoster={handleEventPoster}
-                        onError={setError}
-                    />
-                ) : null}
+                <div
+                    className={`grid gap-6 ${
+                        previewOn ? 'lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)]' : ''
+                    }`}
+                >
+                    <div className="min-w-0">{editor}</div>
+                    {previewOn ? (
+                        <div className="hidden min-h-[70vh] lg:sticky lg:top-24 lg:block lg:h-[calc(100vh-7rem)]">
+                            <LiveSitePreview content={content} focusTab={tab} />
+                        </div>
+                    ) : null}
+                </div>
             </div>
         </div>
     );
