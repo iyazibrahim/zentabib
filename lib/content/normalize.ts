@@ -104,7 +104,16 @@ export function normalizeSiteContent(raw: unknown): SiteContent {
             ...defaults.servicesSection,
             ...(input.servicesSection ?? {}),
         },
-        services: input.services?.length ? input.services : defaults.services,
+        services: (input.services?.length ? input.services : defaults.services).map((service) => ({
+            slug: service.slug || 'service',
+            title: service.title || 'Untitled service',
+            tagline: service.tagline || '',
+            summary: service.summary || '',
+            description: service.description || '',
+            bullets: service.bullets?.length ? service.bullets : [],
+            icon: service.icon || 'screening',
+            imageSrc: service.imageSrc || '',
+        })),
         gallery: {
             ...defaults.gallery,
             ...(input.gallery ?? {}),

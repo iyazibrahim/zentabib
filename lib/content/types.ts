@@ -12,10 +12,12 @@ export type ServiceBullet = {
 export type Service = {
     slug: string;
     title: string;
+    tagline: string;
     summary: string;
     description: string;
     bullets: ServiceBullet[];
     icon: 'screening' | 'imaging' | 'monitoring';
+    imageSrc: string;
 };
 
 export type GalleryPhoto = {

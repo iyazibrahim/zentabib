@@ -38,54 +38,70 @@ export default async function ServicePage({ params }: PageProps) {
 
             <main className="pt-32 pb-20">
                 <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-                    <div className="rounded-3xl border border-stone-100 bg-white p-8 shadow-xl md:p-12">
-                        <div
-                            className={`mb-8 flex h-16 w-16 items-center justify-center rounded-2xl ${serviceIconColors[service.icon]}`}
-                        >
-                            <ServiceIcon icon={service.icon} className="h-8 w-8" />
-                        </div>
+                    <div className="overflow-hidden rounded-3xl border border-stone-100 bg-white shadow-xl">
+                        {service.imageSrc ? (
+                            <img
+                                src={service.imageSrc}
+                                alt={service.title}
+                                className="h-56 w-full object-cover md:h-72"
+                            />
+                        ) : (
+                            <div
+                                className={`flex h-40 items-center justify-center md:h-48 ${serviceIconColors[service.icon]}`}
+                            >
+                                <ServiceIcon icon={service.icon} className="h-10 w-10" />
+                            </div>
+                        )}
 
-                        <h1 className="mb-6 text-4xl font-bold text-stone-900 md:text-5xl">
-                            {service.title}
-                        </h1>
+                        <div className="p-8 md:p-12">
+                            <h1 className="mb-4 text-4xl font-bold text-stone-900 md:text-5xl">
+                                {service.title}
+                            </h1>
 
-                        <p className="mb-8 text-xl leading-relaxed text-stone-600">
-                            {service.summary}
-                        </p>
+                            {service.tagline ? (
+                                <p className="mb-6 text-lg font-medium text-emerald-700 italic">
+                                    —{service.tagline}
+                                </p>
+                            ) : null}
 
-                        <p className="mb-10 text-lg leading-relaxed text-stone-600">
-                            {service.description}
-                        </p>
+                            <p className="mb-8 text-xl leading-relaxed text-stone-600">
+                                {service.summary}
+                            </p>
 
-                        <div className="mb-10 space-y-4">
-                            {service.bullets.map((bullet) => (
-                                <div
-                                    key={bullet.label}
-                                    className="rounded-2xl border border-stone-100 bg-stone-50 p-5"
+                            <p className="mb-10 text-lg leading-relaxed text-stone-600">
+                                {service.description}
+                            </p>
+
+                            <div className="mb-10 space-y-4">
+                                {service.bullets.map((bullet) => (
+                                    <div
+                                        key={bullet.label}
+                                        className="rounded-2xl border border-stone-100 bg-stone-50 p-5"
+                                    >
+                                        <h2 className="mb-2 text-lg font-bold text-emerald-700">
+                                            {bullet.label}
+                                        </h2>
+                                        <p className="text-stone-600">{bullet.text}</p>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="flex flex-col gap-4 sm:flex-row">
+                                <Link
+                                    href="/#services"
+                                    className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-emerald-700"
                                 >
-                                    <h2 className="mb-2 text-lg font-bold text-emerald-700">
-                                        {bullet.label}
-                                    </h2>
-                                    <p className="text-stone-600">{bullet.text}</p>
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="flex flex-col gap-4 sm:flex-row">
-                            <Link
-                                href="/#services"
-                                className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-emerald-700"
-                            >
-                                Back to Services
-                            </Link>
-                            <a
-                                href={content.contact.whatsappUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center rounded-full border border-stone-200 bg-white px-6 py-3 font-semibold text-stone-700 transition-colors hover:bg-stone-50"
-                            >
-                                Contact Us
-                            </a>
+                                    Back to Services
+                                </Link>
+                                <a
+                                    href={content.contact.whatsappUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center justify-center rounded-full border border-stone-200 bg-white px-6 py-3 font-semibold text-stone-700 transition-colors hover:bg-stone-50"
+                                >
+                                    Contact Us
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

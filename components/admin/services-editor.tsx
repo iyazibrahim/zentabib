@@ -5,6 +5,7 @@ import { Pencil, Plus, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import AdminModal from './admin-modal';
 import { Field, SectionCard } from './fields';
+import ImageDropzone from './image-dropzone';
 
 const ICON_OPTIONS: Service['icon'][] = ['screening', 'imaging', 'monitoring'];
 
@@ -36,6 +37,7 @@ function emptyService(services: Service[]): Service {
     return {
         slug: uniqueSlug('new-service', services),
         title: 'New service',
+        tagline: '',
         summary: '',
         description: '',
         bullets: [
@@ -44,15 +46,20 @@ function emptyService(services: Service[]): Service {
             { label: 'Affordable & Creative', text: '' },
         ],
         icon: 'screening',
+        imageSrc: '',
     };
 }
 
 export default function ServicesEditor({
     content,
     onChange,
+    onUploadImage,
+    onError,
 }: {
     content: SiteContent;
     onChange: (content: SiteContent) => void;
+    onUploadImage: (slug: string, file: File) => Promise<void>;
+    onError: (message: string) => void;
 }) {
     const [draft, setDraft] = useState<Service | null>(null);
     const [mode, setMode] = useState<'create' | 'edit' | null>(null);
@@ -89,10 +96,16 @@ export default function ServicesEditor({
                 ? uniqueSlug(draft.slug || draft.title, content.services)
                 : uniqueSlug(draft.slug || draft.title, content.services, editingSlug ?? undefined);
 
+        const liveImage =
+            content.services.find((service) => service.slug === (editingSlug ?? draft.slug))
+                ?.imageSrc ?? draft.imageSrc;
+
         const nextService: Service = {
             ...draft,
             slug: nextSlug,
             title: draft.title.trim() || 'Untitled service',
+            tagline: draft.tagline.trim(),
+            imageSrc: liveImage,
         };
 
         if (mode === 'create') {
@@ -170,12 +183,21 @@ export default function ServicesEditor({
                             key={service.slug}
                             className="flex flex-wrap items-start justify-between gap-3 rounded-2xl border border-stone-200 bg-white px-4 py-4 shadow-sm"
                         >
-                            <div className="min-w-0 flex-1">
-                                <p className="font-semibold text-stone-900">{service.title}</p>
-                                <p className="mt-0.5 text-xs text-stone-500">/{service.slug}</p>
-                                <p className="mt-2 line-clamp-2 text-sm text-stone-600">
-                                    {service.summary || 'No summary'}
-                                </p>
+                            <div className="flex min-w-0 flex-1 gap-3">
+                                {service.imageSrc ? (
+                                    <img
+                                        src={service.imageSrc}
+                                        alt=""
+                                        className="h-16 w-20 shrink-0 rounded-lg object-cover"
+                                    />
+                                ) : null}
+                                <div className="min-w-0">
+                                    <p className="font-semibold text-stone-900">{service.title}</p>
+                                    <p className="mt-0.5 text-xs text-stone-500">/{service.slug}</p>
+                                    <p className="mt-2 line-clamp-2 text-sm text-stone-600">
+                                        {service.summary || 'No summary'}
+                                    </p>
+                                </div>
                             </div>
                             <div className="flex flex-wrap gap-2">
                                 <button
@@ -229,9 +251,15 @@ export default function ServicesEditor({
                             value={draft.slug}
                             onChange={(slug) => setDraft({ ...draft, slug })}
                         />
+                        <Field
+                            label="Tagline"
+                            hint="Short line under the title"
+                            value={draft.tagline}
+                            onChange={(tagline) => setDraft({ ...draft, tagline })}
+                        />
                         <label className="block space-y-1">
                             <span className="text-sm font-medium text-stone-800">Icon</span>
-                            <span className="block text-xs text-stone-500">Card icon</span>
+                            <span className="block text-xs text-stone-500">Fallback icon</span>
                             <select
                                 value={draft.icon}
                                 onChange={(event) =>
@@ -264,6 +292,31 @@ export default function ServicesEditor({
                             rows={5}
                             onChange={(description) => setDraft({ ...draft, description })}
                         />
+                        {mode === 'edit' && editingSlug ? (
+                            <ImageDropzone
+                                label="Drop service image here"
+                                previewSrc={
+                                    content.services.find((service) => service.slug === editingSlug)
+                                        ?.imageSrc || undefined
+                                }
+                                onFile={async (file) => {
+                                    try {
+                                        await onUploadImage(editingSlug, file);
+                                    } catch (err) {
+                                        onError(
+                                            err instanceof Error
+                                                ? err.message
+                                                : 'Image upload failed',
+                                        );
+                                        throw err;
+                                    }
+                                }}
+                            />
+                        ) : (
+                            <p className="rounded-xl border border-dashed border-stone-200 px-3 py-3 text-xs text-stone-500">
+                                Save the service first, then edit it to upload an image.
+                            </p>
+                        )}
                         {draft.bullets.map((bullet, bulletIndex) => (
                             <div
                                 key={`bullet-${bulletIndex}`}

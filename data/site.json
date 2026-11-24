@@ -61,6 +61,7 @@
     {
       "slug": "ai-health-screening",
       "title": "AI Health Screening",
+      "tagline": "Guardians of early health insight",
       "summary": "Rapid, intelligent health screening that helps identify potential risk signals early and guides timely next steps.",
       "description": "Our AI Health Screening solution uses machine learning and structured health assessments to turn routine checkups and screening data into clear, actionable insights. Designed for high speed and broad accessibility, it helps clinics, community outreach programs, and individuals spot early indicators sooner—supporting proactive decision-making without complex, slow bottlenecks.",
       "bullets": [
@@ -77,11 +78,13 @@
           "text": "Streamlines early preventive checks to keep routine screening practical and scalable for wider populations."
         }
       ],
-      "icon": "screening"
+      "icon": "screening",
+      "imageSrc": "/services/ai-health-screening.jpg"
     },
     {
       "slug": "cardiopulmonary-image-diagnostic",
       "title": "Cardiopulmonary Image Diagnostic",
+      "tagline": "A clearer bridge for heart and lung evaluation",
       "summary": "AI-assisted medical imaging support focused on heart and lung evaluations for faster, clearer diagnostic workflows.",
       "description": "Our Cardiopulmonary Image Diagnostic service applies advanced AI analysis to medical imaging—such as chest X-rays—to assist clinicians in detecting and evaluating cardiopulmonary abnormalities. By highlighting areas of interest with speed and consistency, it supports sharper clinical review, helps prioritize urgent cases, and brings high-value diagnostic assistance to care settings where specialist turnaround might otherwise be delayed.",
       "bullets": [
@@ -98,11 +101,13 @@
           "text": "Pairs smart imaging software with portable or existing diagnostic workflows to expand access without heavy infrastructure overhead."
         }
       ],
-      "icon": "imaging"
+      "icon": "imaging",
+      "imageSrc": "/services/cardiopulmonary-imaging.jpg"
     },
     {
       "slug": "real-time-health-monitoring",
       "title": "Real-Time Health Monitoring",
+      "tagline": "A smart companion for continuous wellness",
       "summary": "Continuous, connected physiological tracking that keeps tabs on vital health trends as they happen.",
       "description": "Our Real-Time Health Monitoring service leverages connected sensors, wearables, and smart digital platforms to track key physiological metrics continuously. Instead of relying solely on occasional snapshots during clinic visits, it enables ongoing visibility into daily health trends—empowering individuals and care teams to notice changes early and respond with greater agility.",
       "bullets": [
@@ -119,7 +124,8 @@
           "text": "Turns everyday connected hardware and smart analytics into a practical, continuous wellness layer for broader community adoption."
         }
       ],
-      "icon": "monitoring"
+      "icon": "monitoring",
+      "imageSrc": "/services/realtime-monitoring.jpg"
     }
   ],
   "gallery": {

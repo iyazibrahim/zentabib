@@ -218,6 +218,26 @@ export default function AdminApp() {
         showStatus('Poster updated');
     }
 
+    async function handleServiceImage(slug: string, file: File) {
+        const formData = new FormData();
+        formData.set('slug', slug);
+        formData.set('file', file);
+
+        const response = await fetch('/api/admin/services/image', {
+            method: 'POST',
+            body: formData,
+        });
+
+        const payload = (await response.json()) as { error?: string; content?: SiteContent };
+        if (!response.ok || !payload.content) {
+            throw new Error(payload.error ?? 'Service image upload failed');
+        }
+
+        setContent(payload.content);
+        setSavedSnapshot(JSON.stringify(payload.content));
+        showStatus('Service image updated');
+    }
+
     async function handleLogoUpload(file: File) {
         const formData = new FormData();
         formData.set('file', file);
@@ -305,7 +325,12 @@ export default function AdminApp() {
                 />
             ) : null}
             {tab === 'services' ? (
-                <ServicesEditor content={content} onChange={setContent} />
+                <ServicesEditor
+                    content={content}
+                    onChange={setContent}
+                    onUploadImage={handleServiceImage}
+                    onError={setError}
+                />
             ) : null}
             {tab === 'gallery' ? (
                 <GalleryEditor

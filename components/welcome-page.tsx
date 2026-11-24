@@ -253,52 +253,86 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
             ) : null}
 
             {sections.services ? (
-                <section id="services" className="relative bg-stone-50 py-24">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <motion.div {...fadeInUp} className="mb-16 text-center">
-                            <h2 className="mb-4 text-3xl font-bold text-stone-900 md:text-4xl">
+                <section
+                    id="services"
+                    className="relative overflow-hidden bg-[#071428] py-24 text-white"
+                >
+                    <div
+                        aria-hidden
+                        className="pointer-events-none absolute inset-0 opacity-40"
+                        style={{
+                            backgroundImage:
+                                'radial-gradient(circle at 18% 22%, rgba(34,211,238,0.18), transparent 28%), radial-gradient(circle at 82% 12%, rgba(16,185,129,0.14), transparent 24%), linear-gradient(rgba(56,189,248,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.07) 1px, transparent 1px)',
+                            backgroundSize: 'auto, auto, 48px 48px, 48px 48px',
+                        }}
+                    />
+                    <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+                        <motion.div {...fadeInUp} className="mb-12 text-center md:mb-16">
+                            <p className="mb-3 text-xs font-semibold tracking-[0.35em] text-cyan-300 uppercase">
+                                Solution
+                            </p>
+                            <h2 className="mb-4 text-3xl font-bold tracking-wide text-white uppercase md:text-5xl">
                                 {content.servicesSection.headline}
                             </h2>
-                            <p className="mx-auto max-w-3xl text-lg text-stone-600">
+                            <p className="mx-auto max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
                                 {content.servicesSection.intro}
                             </p>
                         </motion.div>
 
-                        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+                        <div className="space-y-5 md:space-y-6">
                             {content.services.map((service, index) => (
-                                <motion.div
+                                <motion.article
                                     key={service.slug}
-                                    initial={{ opacity: 0, y: 20 }}
+                                    initial={{ opacity: 0, y: 24 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                                    whileHover={{ y: -5 }}
-                                    className="group relative rounded-2xl border border-stone-100 bg-white p-8 transition-all duration-300 hover:shadow-xl"
+                                    transition={{ duration: 0.5, delay: index * 0.08 }}
+                                    className="overflow-hidden rounded-2xl border border-cyan-400/20 bg-[#12263f]/80 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-sm"
                                 >
-                                    <Link
-                                        href={`/services/${service.slug}`}
-                                        className="absolute inset-0 z-10"
-                                    >
-                                        <span className="sr-only">
-                                            View details for {service.title}
-                                        </span>
-                                    </Link>
-                                    <div
-                                        className={`mb-6 flex h-14 w-14 items-center justify-center rounded-xl ${serviceIconColors[service.icon]} transition-transform duration-300 group-hover:scale-110`}
-                                    >
-                                        <ServiceIcon icon={service.icon} />
+                                    <div className="grid md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+                                        <div className="relative min-h-48 overflow-hidden md:min-h-56">
+                                            {service.imageSrc ? (
+                                                <img
+                                                    src={service.imageSrc}
+                                                    alt={service.title}
+                                                    className="h-full w-full object-cover"
+                                                />
+                                            ) : (
+                                                <div
+                                                    className={`flex h-full min-h-48 items-center justify-center md:min-h-56 ${serviceIconColors[service.icon]}`}
+                                                >
+                                                    <ServiceIcon
+                                                        icon={service.icon}
+                                                        className="h-12 w-12"
+                                                    />
+                                                </div>
+                                            )}
+                                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#12263f]/40 max-md:bg-gradient-to-b max-md:to-[#12263f]/50" />
+                                        </div>
+                                        <div className="flex flex-col justify-center px-5 py-6 sm:px-7 sm:py-8">
+                                            <h3 className="text-xl font-bold text-white md:text-2xl">
+                                                {service.title}
+                                            </h3>
+                                            {service.tagline ? (
+                                                <p className="mt-2 text-sm font-medium text-cyan-300/90 italic md:text-base">
+                                                    —{service.tagline}
+                                                </p>
+                                            ) : null}
+                                            <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-[15px]">
+                                                {service.summary}
+                                            </p>
+                                            <div className="mt-6">
+                                                <Link
+                                                    href={`/services/${service.slug}`}
+                                                    className="inline-flex items-center gap-2 rounded-full bg-sky-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-sky-400"
+                                                >
+                                                    check the details
+                                                    <ArrowRight className="h-3.5 w-3.5" />
+                                                </Link>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <h3 className="mb-3 text-xl font-bold text-stone-900">
-                                        {service.title}
-                                    </h3>
-                                    <p className="leading-relaxed text-stone-600">
-                                        {service.summary}
-                                    </p>
-                                    <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-emerald-700">
-                                        Learn more
-                                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                                    </div>
-                                </motion.div>
+                                </motion.article>
                             ))}
                         </div>
                     </div>

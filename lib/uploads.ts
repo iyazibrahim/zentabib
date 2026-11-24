@@ -10,7 +10,7 @@ const ALLOWED_TYPES: Record<string, string> = {
     'image/gif': '.gif',
 };
 
-export type UploadFolder = 'gallery' | 'events' | 'branding';
+export type UploadFolder = 'gallery' | 'events' | 'branding' | 'services';
 
 export async function saveUploadedImage(file: File, folder: UploadFolder) {
     const extension = ALLOWED_TYPES[file.type];
