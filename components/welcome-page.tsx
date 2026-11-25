@@ -1,10 +1,10 @@
 'use client';
 
+import { ATMOSPHERES } from '@/lib/atmospheres';
 import type { SiteContent } from '@/lib/content/types';
 import { ServiceIcon, serviceIconColors } from '@/lib/service-icons';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
-    ArrowRight,
     CalendarDays,
     Lightbulb,
     Mail,
@@ -61,13 +61,6 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
         content.events.find((event) => event.visible) ??
         null;
 
-    const fadeInUp = {
-        initial: { opacity: 0, y: 20 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true },
-        transition: { duration: 0.6 },
-    };
-
     const navLinks = [
         sections.hero ? { href: '#home', label: 'Home' } : null,
         sections.services ? { href: '#services', label: 'Services' } : null,
@@ -78,12 +71,16 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
     ].filter(Boolean) as { href: string; label: string }[];
 
     return (
-        <div className="min-h-screen bg-stone-50 font-sans text-stone-800 selection:bg-emerald-200 selection:text-emerald-900">
-            <nav className="fixed z-50 w-full border-b border-stone-100 bg-white/80 backdrop-blur-md">
+        <div className="min-h-screen bg-stone-100 font-sans text-stone-800 selection:bg-emerald-200 selection:text-emerald-900">
+            <nav className="fixed z-50 w-full border-b border-white/10 bg-[#06101f]/80 backdrop-blur-md">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-20 items-center justify-between">
-                        <div className="flex flex-shrink-0 items-center">
-                            <img src={logoSrc} alt="Zen AI" className="h-12 w-auto" />
+                        <div className="flex flex-shrink-0 items-center rounded-lg bg-white px-2 py-1">
+                            <img
+                                src={logoSrc}
+                                alt="Zen AI Healthcare"
+                                className="h-10 w-auto"
+                            />
                         </div>
 
                         <div className="hidden items-center space-x-8 md:flex">
@@ -92,15 +89,15 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                                     <a
                                         key={link.href}
                                         href={link.href}
-                                        className="rounded-full bg-emerald-600 px-5 py-2.5 font-medium text-white shadow-lg shadow-emerald-600/20 transition-all hover:bg-emerald-700"
+                                        className="rounded-full bg-emerald-600 px-5 py-2.5 font-medium text-white transition-colors hover:bg-emerald-700"
                                     >
-                                        Contact Us
+                                        Contact
                                     </a>
                                 ) : (
                                     <a
                                         key={link.href}
                                         href={link.href}
-                                        className="font-medium text-stone-600 transition-colors hover:text-emerald-600"
+                                        className="font-medium text-slate-200 transition-colors hover:text-white"
                                     >
                                         {link.label}
                                     </a>
@@ -111,7 +108,7 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                         <div className="md:hidden">
                             <button
                                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                className="p-2 text-stone-600"
+                                className="p-2 text-slate-200"
                                 aria-label="Toggle menu"
                             >
                                 {isMenuOpen ? <X /> : <Menu />}
@@ -120,12 +117,8 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                     </div>
                 </div>
 
-                {isMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        className="border-b border-stone-100 bg-white md:hidden"
-                    >
+                {isMenuOpen ? (
+                    <div className="border-b border-white/10 bg-[#06101f] md:hidden">
                         <div className="space-y-2 px-4 pt-2 pb-6">
                             {navLinks.map((link) => (
                                 <a
@@ -134,23 +127,28 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                                     onClick={() => setIsMenuOpen(false)}
                                     className={`block px-3 py-2 font-medium ${
                                         link.href === '#contact'
-                                            ? 'text-emerald-600'
-                                            : 'text-stone-600'
+                                            ? 'text-emerald-400'
+                                            : 'text-slate-200'
                                     }`}
                                 >
-                                    {link.href === '#contact' ? 'Contact Us' : link.label}
+                                    {link.href === '#contact' ? 'Contact' : link.label}
                                 </a>
                             ))}
                         </div>
-                    </motion.div>
-                )}
+                    </div>
+                ) : null}
             </nav>
 
             {sections.hero ? (
-                <section id="home" className="relative overflow-hidden pt-32 pb-20 lg:pt-48 lg:pb-32">
+                <section id="home" className="relative overflow-hidden pt-28 pb-24 lg:pt-36 lg:pb-32">
                     <div className="absolute inset-0 -z-10">
-                        <div className="absolute top-0 right-0 h-full w-1/2 bg-gradient-to-l from-emerald-50 to-transparent opacity-60" />
-                        <div className="absolute bottom-0 left-0 h-1/2 w-1/2 bg-gradient-to-tr from-stone-100 to-transparent opacity-60" />
+                        <img
+                            src={ATMOSPHERES.hero}
+                            alt=""
+                            className="h-full w-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-[#04101f]/70" />
+                        <div className="absolute inset-0 bg-gradient-to-b from-[#04101f]/40 via-transparent to-[#04101f]/85" />
                     </div>
 
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -159,33 +157,35 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                             className="mx-auto max-w-4xl text-center"
                         >
                             <motion.div
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 16 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8 }}
+                                transition={{ duration: 0.7 }}
                             >
-                                <span className="mb-6 inline-block rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold tracking-wide text-emerald-800">
-                                    {content.hero.badge}
-                                </span>
-                                <h1 className="mb-8 text-5xl leading-tight font-bold tracking-tight text-stone-900 md:text-7xl">
-                                    {content.hero.headlineLead} <br />
-                                    <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                                <img
+                                    src={ATMOSPHERES.seal}
+                                    alt="Zen AI Healthcare"
+                                    className="mx-auto mb-8 h-36 w-36 rounded-full bg-white/95 object-contain p-3 shadow-xl sm:h-44 sm:w-44"
+                                />
+                                <h1 className="mb-6 text-4xl leading-tight font-bold tracking-tight text-white md:text-6xl">
+                                    {content.hero.headlineLead}
+                                    <br />
+                                    <span className="text-emerald-300">
                                         {content.hero.headlineAccent}
                                     </span>
                                 </h1>
-                                <p className="mx-auto mb-10 max-w-2xl text-xl leading-relaxed text-stone-600">
+                                <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-slate-200 md:text-xl">
                                     {content.hero.subheadline}
                                 </p>
                                 <div className="flex flex-col justify-center gap-4 sm:flex-row">
                                     <a
                                         href="#services"
-                                        className="group flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-8 py-4 font-semibold text-white shadow-xl shadow-emerald-600/20 transition-all hover:bg-emerald-700"
+                                        className="rounded-full bg-emerald-600 px-8 py-4 font-semibold text-white transition-colors hover:bg-emerald-700"
                                     >
                                         {content.hero.primaryCta}
-                                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                                     </a>
                                     <a
                                         href="#about"
-                                        className="flex items-center justify-center rounded-full border border-stone-200 bg-white px-8 py-4 font-semibold text-stone-700 transition-all hover:bg-stone-50"
+                                        className="rounded-full border border-white/30 bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20"
                                     >
                                         {content.hero.secondaryCta}
                                     </a>
@@ -197,52 +197,54 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
             ) : null}
 
             {sections.about || sections.philosophy ? (
-                <section id="about" className="bg-white py-24">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <section id="about" className="relative overflow-hidden py-24">
+                    <div className="absolute inset-0 -z-10">
+                        <img
+                            src={ATMOSPHERES.about}
+                            alt=""
+                            className="h-full w-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-teal-950/55" />
+                    </div>
+                    <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         {sections.about ? (
-                            <motion.div {...fadeInUp} className="mx-auto mb-16 max-w-3xl text-center">
-                                <h2 className="mb-6 text-3xl font-bold text-stone-900 md:text-4xl">
+                            <div className="mx-auto mb-14 max-w-3xl text-center">
+                                <h2 className="mb-5 text-3xl font-bold text-white md:text-4xl">
                                     {content.about.title}
                                 </h2>
-                                <p className="text-lg leading-relaxed text-stone-600">
+                                <p className="text-lg leading-relaxed text-teal-50">
                                     {content.about.body}
                                 </p>
-                            </motion.div>
+                            </div>
                         ) : null}
 
                         {sections.philosophy ? (
                             <>
-                                <div className="mb-4 text-center">
-                                    <h3 className="mb-10 text-2xl font-bold text-stone-900">
-                                        {content.philosophy.title}
-                                    </h3>
-                                </div>
-
-                                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-                                    {content.philosophy.cards.map((card, index) => {
+                                <h3 className="mb-8 text-center text-2xl font-bold text-white">
+                                    {content.philosophy.title}
+                                </h3>
+                                <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+                                    {content.philosophy.cards.map((card) => {
                                         const Icon =
                                             philosophyIcons[
                                                 card.id as keyof typeof philosophyIcons
                                             ] ?? Sparkles;
                                         return (
-                                            <motion.div
+                                            <div
                                                 key={card.id}
-                                                initial={{ opacity: 0, y: 20 }}
-                                                whileInView={{ opacity: 1, y: 0 }}
-                                                viewport={{ once: true }}
-                                                transition={{ duration: 0.5, delay: index * 0.08 }}
-                                                className="rounded-2xl border border-stone-100 bg-stone-50 p-6"
+                                                className="rounded-2xl border border-white/20 bg-white p-6 shadow-sm"
                                             >
-                                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
-                                                    <Icon className="h-6 w-6" />
-                                                </div>
-                                                <h4 className="mb-3 text-xl font-bold text-stone-900">
+                                                <Icon
+                                                    className="mb-4 h-6 w-6 text-emerald-700"
+                                                    aria-hidden
+                                                />
+                                                <h4 className="mb-2 text-lg font-semibold text-stone-900">
                                                     {card.title}
                                                 </h4>
                                                 <p className="leading-relaxed text-stone-600">
                                                     {card.description}
                                                 </p>
-                                            </motion.div>
+                                            </div>
                                         );
                                     })}
                                 </div>
@@ -259,35 +261,28 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                 >
                     <div
                         aria-hidden
-                        className="pointer-events-none absolute inset-0 opacity-40"
+                        className="pointer-events-none absolute inset-0 opacity-35"
                         style={{
                             backgroundImage:
-                                'radial-gradient(circle at 18% 22%, rgba(34,211,238,0.18), transparent 28%), radial-gradient(circle at 82% 12%, rgba(16,185,129,0.14), transparent 24%), linear-gradient(rgba(56,189,248,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.07) 1px, transparent 1px)',
+                                'radial-gradient(circle at 18% 22%, rgba(34,211,238,0.16), transparent 28%), radial-gradient(circle at 82% 12%, rgba(16,185,129,0.12), transparent 24%), linear-gradient(rgba(56,189,248,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.06) 1px, transparent 1px)',
                             backgroundSize: 'auto, auto, 48px 48px, 48px 48px',
                         }}
                     />
                     <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-                        <motion.div {...fadeInUp} className="mb-12 text-center md:mb-16">
-                            <p className="mb-3 text-xs font-semibold tracking-[0.35em] text-cyan-300 uppercase">
-                                Solution
-                            </p>
-                            <h2 className="mb-4 text-3xl font-bold tracking-wide text-white uppercase md:text-5xl">
+                        <div className="mb-12 text-center md:mb-14">
+                            <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">
                                 {content.servicesSection.headline}
                             </h2>
                             <p className="mx-auto max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
                                 {content.servicesSection.intro}
                             </p>
-                        </motion.div>
+                        </div>
 
                         <div className="space-y-5 md:space-y-6">
-                            {content.services.map((service, index) => (
-                                <motion.article
+                            {content.services.map((service) => (
+                                <article
                                     key={service.slug}
-                                    initial={{ opacity: 0, y: 24 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: index * 0.08 }}
-                                    className="overflow-hidden rounded-2xl border border-cyan-400/20 bg-[#12263f]/80 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-sm"
+                                    className="overflow-hidden rounded-2xl border border-cyan-400/20 bg-[#12263f]/85"
                                 >
                                     <div className="grid md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
                                         <div className="relative min-h-48 overflow-hidden md:min-h-56">
@@ -307,15 +302,14 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                                                     />
                                                 </div>
                                             )}
-                                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#12263f]/40 max-md:bg-gradient-to-b max-md:to-[#12263f]/50" />
                                         </div>
                                         <div className="flex flex-col justify-center px-5 py-6 sm:px-7 sm:py-8">
                                             <h3 className="text-xl font-bold text-white md:text-2xl">
                                                 {service.title}
                                             </h3>
                                             {service.tagline ? (
-                                                <p className="mt-2 text-sm font-medium text-cyan-300/90 italic md:text-base">
-                                                    —{service.tagline}
+                                                <p className="mt-2 text-sm font-medium text-cyan-300 md:text-base">
+                                                    {service.tagline}
                                                 </p>
                                             ) : null}
                                             <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-[15px]">
@@ -324,15 +318,14 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                                             <div className="mt-6">
                                                 <Link
                                                     href={`/services/${service.slug}`}
-                                                    className="inline-flex items-center gap-2 rounded-full bg-sky-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-sky-400"
+                                                    className="inline-flex rounded-full bg-sky-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-400"
                                                 >
-                                                    check the details
-                                                    <ArrowRight className="h-3.5 w-3.5" />
+                                                    View {service.title}
                                                 </Link>
                                             </div>
                                         </div>
                                     </div>
-                                </motion.article>
+                                </article>
                             ))}
                         </div>
                     </div>
@@ -340,16 +333,24 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
             ) : null}
 
             {sections.gallery ? (
-                <section id="gallery" className="bg-white py-24">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <motion.div {...fadeInUp} className="mb-12 text-center">
+                <section id="gallery" className="relative overflow-hidden py-24">
+                    <div className="absolute inset-0 -z-10">
+                        <img
+                            src={ATMOSPHERES.gallery}
+                            alt=""
+                            className="h-full w-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-white/78" />
+                    </div>
+                    <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div className="mb-12 text-center">
                             <h2 className="mb-4 text-3xl font-bold text-stone-900 md:text-4xl">
                                 {content.gallery.title}
                             </h2>
                             <p className="mx-auto max-w-2xl text-lg text-stone-600">
                                 {content.gallery.intro}
                             </p>
-                        </motion.div>
+                        </div>
 
                         <div className="mb-10 flex flex-wrap justify-center gap-3">
                             <button
@@ -358,7 +359,7 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                                 className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                                     activeAlbumId === 'all'
                                         ? 'bg-emerald-600 text-white'
-                                        : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
+                                        : 'bg-white text-stone-700 hover:bg-stone-100'
                                 }`}
                             >
                                 All
@@ -371,7 +372,7 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                                     className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                                         activeAlbumId === album.id
                                             ? 'bg-emerald-600 text-white'
-                                            : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
+                                            : 'bg-white text-stone-700 hover:bg-stone-100'
                                     }`}
                                 >
                                     {album.title}
@@ -380,19 +381,15 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                         </div>
 
                         {galleryPhotos.length === 0 ? (
-                            <div className="rounded-2xl border border-dashed border-stone-200 bg-stone-50 px-6 py-16 text-center">
+                            <div className="rounded-2xl border border-dashed border-stone-300 bg-white/80 px-6 py-16 text-center">
                                 <p className="text-stone-600">No photos yet</p>
                             </div>
                         ) : (
                             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                                {galleryPhotos.map((photo, index) => (
-                                    <motion.figure
+                                {galleryPhotos.map((photo) => (
+                                    <figure
                                         key={photo.id}
-                                        initial={{ opacity: 0, y: 16 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 0.4, delay: index * 0.05 }}
-                                        className="overflow-hidden rounded-2xl border border-stone-100 bg-stone-50 shadow-sm"
+                                        className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm"
                                     >
                                         <img
                                             src={photo.src}
@@ -409,7 +406,7 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                                                 </p>
                                             ) : null}
                                         </figcaption>
-                                    </motion.figure>
+                                    </figure>
                                 ))}
                             </div>
                         )}
@@ -418,26 +415,28 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
             ) : null}
 
             {sections.events ? (
-                <section id="events" className="bg-stone-900 py-24 text-white">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <motion.div {...fadeInUp} className="mb-12 text-center">
+                <section id="events" className="relative overflow-hidden bg-stone-900 py-24 text-white">
+                    <div
+                        aria-hidden
+                        className="pointer-events-none absolute inset-0 opacity-30"
+                        style={{
+                            backgroundImage:
+                                'radial-gradient(circle at 70% 20%, rgba(16,185,129,0.25), transparent 35%), radial-gradient(circle at 20% 80%, rgba(14,165,233,0.18), transparent 30%)',
+                        }}
+                    />
+                    <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div className="mb-12 text-center">
                             <h2 className="mb-4 text-3xl font-bold md:text-4xl">
                                 {content.eventsSection.title}
                             </h2>
                             <p className="mx-auto max-w-2xl text-lg text-stone-300">
                                 {content.eventsSection.intro}
                             </p>
-                        </motion.div>
+                        </div>
 
                         {featuredEvent ? (
                             <div className="grid items-start gap-10 lg:grid-cols-2">
-                                <motion.div
-                                    initial={{ opacity: 0, x: -30 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.6 }}
-                                    className="overflow-hidden rounded-3xl border border-stone-700 bg-stone-800"
-                                >
+                                <div className="overflow-hidden rounded-3xl border border-stone-700 bg-stone-800">
                                     {featuredEvent.posterSrc ? (
                                         <img
                                             src={featuredEvent.posterSrc}
@@ -449,14 +448,9 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                                             Event poster coming soon
                                         </div>
                                     )}
-                                </motion.div>
+                                </div>
 
-                                <motion.div
-                                    initial={{ opacity: 0, x: 30 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.6 }}
-                                >
+                                <div>
                                     <h3 className="mb-4 text-3xl font-bold md:text-4xl">
                                         {featuredEvent.title}
                                     </h3>
@@ -486,7 +480,7 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                                             {featuredEvent.details}
                                         </p>
                                     ) : null}
-                                </motion.div>
+                                </div>
                             </div>
                         ) : (
                             <div className="rounded-2xl border border-dashed border-stone-700 px-6 py-16 text-center text-stone-400">
@@ -498,27 +492,30 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
             ) : null}
 
             {sections.contact ? (
-                <section id="contact" className="bg-emerald-50 py-24">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <motion.div {...fadeInUp} className="mb-16 text-center">
-                            <h2 className="mb-4 text-3xl font-bold text-stone-900 md:text-4xl">
+                <section id="contact" className="relative overflow-hidden py-24">
+                    <div className="absolute inset-0 -z-10">
+                        <img
+                            src={ATMOSPHERES.contact}
+                            alt=""
+                            className="h-full w-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-emerald-950/45" />
+                    </div>
+                    <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div className="mb-14 text-center">
+                            <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">
                                 {content.contact.title}
                             </h2>
-                            <p className="text-lg text-stone-600">{content.contact.intro}</p>
-                        </motion.div>
+                            <p className="text-lg text-emerald-50">{content.contact.intro}</p>
+                        </div>
 
-                        <div className="grid gap-8 lg:grid-cols-3">
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.1 }}
-                                className="rounded-2xl border border-emerald-100 bg-white p-8 text-center shadow-sm"
-                            >
-                                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-                                    <Phone className="h-6 w-6" />
-                                </div>
-                                <h3 className="mb-2 font-semibold text-stone-900">Contact Us</h3>
+                        <div className="grid gap-6 lg:grid-cols-3">
+                            <div className="rounded-2xl border border-white/20 bg-white p-8 text-center shadow-sm">
+                                <Phone
+                                    className="mx-auto mb-4 h-6 w-6 text-emerald-700"
+                                    aria-hidden
+                                />
+                                <h3 className="mb-2 font-semibold text-stone-900">WhatsApp</h3>
                                 <a
                                     href={content.contact.whatsappUrl}
                                     target="_blank"
@@ -527,52 +524,46 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                                 >
                                     {content.contact.whatsappLabel}
                                 </a>
-                            </motion.div>
+                            </div>
 
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.2 }}
-                                className="rounded-2xl border border-emerald-100 bg-white p-8 text-center shadow-sm"
-                            >
-                                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-                                    <Mail className="h-6 w-6" />
-                                </div>
-                                <h3 className="mb-2 font-semibold text-stone-900">Email Us</h3>
+                            <div className="rounded-2xl border border-white/20 bg-white p-8 text-center shadow-sm">
+                                <Mail
+                                    className="mx-auto mb-4 h-6 w-6 text-emerald-700"
+                                    aria-hidden
+                                />
+                                <h3 className="mb-2 font-semibold text-stone-900">Email</h3>
                                 <a
                                     href={`mailto:${content.contact.email}`}
                                     className="text-stone-600 transition-colors hover:text-emerald-600"
                                 >
                                     {content.contact.email}
                                 </a>
-                            </motion.div>
+                            </div>
 
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.3 }}
-                                className="rounded-2xl border border-emerald-100 bg-white p-8 text-center shadow-sm"
-                            >
-                                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-                                    <MapPin className="h-6 w-6" />
-                                </div>
-                                <h3 className="mb-2 font-semibold text-stone-900">Visit Us</h3>
+                            <div className="rounded-2xl border border-white/20 bg-white p-8 text-center shadow-sm">
+                                <MapPin
+                                    className="mx-auto mb-4 h-6 w-6 text-emerald-700"
+                                    aria-hidden
+                                />
+                                <h3 className="mb-2 font-semibold text-stone-900">Visit</h3>
                                 <p className="text-stone-600">{content.contact.address}</p>
-                            </motion.div>
+                            </div>
                         </div>
                     </div>
                 </section>
             ) : null}
 
             {sections.footer ? (
-                <footer className="border-t border-stone-800 bg-stone-900 py-12 text-stone-400">
+                <footer className="border-t border-stone-800 bg-stone-950 py-12 text-stone-400">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
                             <div className="flex items-center">
                                 <div className="rounded-lg bg-white p-1.5">
-                                    <img src={logoSrc} alt="Zen AI" className="h-8 w-auto" />
+                                    <img
+                                        src={logoSrc}
+                                        alt="Zen AI Healthcare"
+                                        className="h-8 w-auto"
+                                    />
                                 </div>
                             </div>
                             <div className="max-w-xl text-center text-sm md:text-right">
