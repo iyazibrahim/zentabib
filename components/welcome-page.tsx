@@ -167,7 +167,12 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                                         className="h-full w-full object-contain"
                                     />
                                 </div>
-                                <h1 className="mb-6 text-4xl leading-tight font-bold tracking-tight text-white md:text-6xl">
+                                {content.hero.badge ? (
+                                    <p className="mb-5 text-sm font-medium tracking-wide text-emerald-200">
+                                        {content.hero.badge}
+                                    </p>
+                                ) : null}
+                                <h1 className="mb-6 text-4xl leading-tight font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
                                     {content.hero.headlineLead}
                                     <br />
                                     <span className="text-emerald-300">
