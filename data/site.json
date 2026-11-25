@@ -13,69 +13,69 @@
     "footer": true
   },
   "seo": {
-    "title": "Zen AI Healthcare - Advance Healthcare Solution Provider",
-    "description": "Zen AI Healthcare uses AI and portable health technology to deliver screening, imaging support, and monitoring for clinics and communities."
+    "title": "Zen AI Healthcare - Malaysia's First Integrated AI & T&CM Healthcare Innovator",
+    "description": "Zen AI Healthcare develops research-based medical devices and accessible health services that combine AI with Western diagnostics and Traditional & Complementary Medicine (T&CM)."
   },
   "hero": {
-    "badge": "",
-    "headlineLead": "Advance Healthcare",
-    "headlineAccent": "Solution Provider",
-    "subheadline": "Zen AI Healthcare builds screening, imaging, and monitoring tools so clinics and communities can act earlier.",
+    "badge": "Fast · Anywhere · Affordable · Creative",
+    "headlineLead": "Malaysia's First Integrated AI & T&CM",
+    "headlineAccent": "Healthcare Innovator",
+    "subheadline": "We develop research-based medical devices and accessible health services designed to reach clinics and communities anywhere. By combining AI with modern Western diagnostics and Traditional & Complementary Medicine (T&CM), Zen AI Healthcare supports earlier intervention and holistic care.",
     "primaryCta": "Explore Services",
-    "secondaryCta": "About Zen AI"
+    "secondaryCta": "Learn More"
   },
   "about": {
-    "title": "Smart healthcare for every community",
-    "body": "Zen AI Healthcare combines AI, portable diagnostics, and practical wellness tools so care is not locked behind high cost or distant hospitals."
+    "title": "Smart Healthcare, Built for Every Community",
+    "body": "At Zen AI Healthcare, we believe advanced medical technology should never be locked behind high costs or distant hospital walls. As a healthcare solution provider, we combine AI, portable diagnostic tools, and holistic wellness innovation to make proactive healthcare simple, practical, and within reach for everyone."
   },
   "philosophy": {
-    "title": "Our philosophy",
+    "title": "Our Philosophy",
     "cards": [
       {
         "id": "fast",
         "title": "Fast",
-        "description": "Screening and digital workflows surface health insights sooner so teams can act without long waits."
+        "description": "AI-powered screening and streamlined digital workflows deliver rapid health insights, helping individuals and providers act early without long wait times."
       },
       {
         "id": "anywhere",
         "title": "Anywhere",
-        "description": "Portable and connected tools bring care to clinics, camps, and remote communities."
+        "description": "From urban clinics to rural and remote communities, our portable and connected health solutions bring quality care directly to where people live and work."
       },
       {
         "id": "affordable",
         "title": "Affordable",
-        "description": "Scalable technology lowers the cost of routine monitoring and early detection."
+        "description": "Designed for real-world accessibility, our scalable technology lowers the cost of routine monitoring and early detection so no community is left behind."
       },
       {
         "id": "creative",
         "title": "Creative",
-        "description": "We blend AI, devices, and wellness practice into care that fits real community settings."
+        "description": "We reimagine care delivery by blending modern AI, smart devices, and holistic wellness principles into fresh, human-centered health solutions."
       }
     ]
   },
   "servicesSection": {
-    "headline": "Our core healthcare solutions",
-    "intro": "Three services for rapid insight, practical deployment, and everyday access."
+    "headline": "Our Core Healthcare Solutions",
+    "intro": "Built on our commitment to serve communities fast, anywhere, affordably, and creatively, Zen AI Healthcare delivers three focused technology-driven services designed for rapid insight, practical deployment, and everyday accessibility."
   },
   "services": [
     {
       "slug": "ai-health-screening",
       "title": "AI Health Screening",
-      "tagline": "Early health insight",
-      "summary": "Rapid health screening that helps identify potential risk signals early and guides next steps.",
-      "description": "AI Health Screening uses machine learning and structured assessments to turn checkup data into clear insights. Clinics, outreach programs, and individuals can spot early indicators without slow bottlenecks.",
+      "tagline": "Guardians of early health insight",
+      "summary": "Rapid, intelligent health screening that helps identify potential risk signals early and guides timely next steps.",
+      "description": "Our AI Health Screening solution uses machine learning and structured health assessments to turn routine checkups and screening data into clear, actionable insights. Designed for high speed and broad accessibility, it helps clinics, community outreach programs, and individuals spot early indicators sooner, supporting proactive decision-making without complex, slow bottlenecks.",
       "bullets": [
         {
           "label": "Fast",
-          "text": "Speeds up initial screening and risk flagging so follow-up can start sooner."
+          "text": "Accelerates initial screening workflows and risk flagging so follow-up action can happen promptly."
         },
         {
           "label": "Anywhere",
-          "text": "Works in clinics, health camps, and community settings."
+          "text": "Easily deployable across clinics, health camps, and community settings."
         },
         {
-          "label": "Affordable and creative",
-          "text": "Keeps preventive checks practical and scalable for wider populations."
+          "label": "Affordable & Creative",
+          "text": "Streamlines early preventive checks to keep routine screening practical and scalable for wider populations."
         }
       ],
       "icon": "screening",
@@ -84,21 +84,21 @@
     {
       "slug": "cardiopulmonary-image-diagnostic",
       "title": "Cardiopulmonary Image Diagnostic",
-      "tagline": "Heart and lung imaging support",
-      "summary": "AI-assisted imaging support for heart and lung evaluations with clearer diagnostic workflows.",
-      "description": "This service applies AI analysis to medical imaging such as chest X-rays to help clinicians review cardiopulmonary findings. It highlights areas of interest so teams can prioritize urgent cases faster.",
+      "tagline": "A clearer bridge for heart and lung evaluation",
+      "summary": "AI-assisted medical imaging support focused on heart and lung evaluations for faster, clearer diagnostic workflows.",
+      "description": "Our Cardiopulmonary Image Diagnostic service applies advanced AI analysis to medical imaging such as chest X-rays to assist clinicians in detecting and evaluating cardiopulmonary abnormalities. By highlighting areas of interest with speed and consistency, it supports sharper clinical review, helps prioritize urgent cases, and brings high-value diagnostic assistance to care settings where specialist turnaround might otherwise be delayed.",
       "bullets": [
         {
           "label": "Fast",
-          "text": "Speeds up image review and prioritization for clinical decisions."
+          "text": "Speeds up image review and prioritization to support timely clinical decisions."
         },
         {
           "label": "Anywhere",
-          "text": "Supports hospitals, outpatient clinics, and decentralized care points."
+          "text": "Enhances diagnostic capability across hospitals, outpatient clinics, and decentralized care points."
         },
         {
-          "label": "Affordable and creative",
-          "text": "Works with portable or existing imaging workflows without heavy new infrastructure."
+          "label": "Affordable & Creative",
+          "text": "Pairs smart imaging software with portable or existing diagnostic workflows to expand access without heavy infrastructure overhead."
         }
       ],
       "icon": "imaging",
@@ -107,21 +107,21 @@
     {
       "slug": "real-time-health-monitoring",
       "title": "Real-Time Health Monitoring",
-      "tagline": "Continuous wellness tracking",
-      "summary": "Connected physiological tracking that follows vital health trends as they happen.",
-      "description": "Real-Time Health Monitoring uses sensors, wearables, and digital platforms to track key metrics continuously. Care teams and individuals can notice changes earlier than occasional clinic snapshots alone allow.",
+      "tagline": "A smart companion for continuous wellness",
+      "summary": "Continuous, connected physiological tracking that keeps tabs on vital health trends as they happen.",
+      "description": "Our Real-Time Health Monitoring service uses connected sensors, wearables, and smart digital platforms to track key physiological metrics continuously. Instead of relying solely on occasional snapshots during clinic visits, it enables ongoing visibility into daily health trends, helping individuals and care teams notice changes early and respond with greater agility.",
       "bullets": [
         {
           "label": "Fast",
-          "text": "Surfaces notable shifts in tracked parameters so support can follow."
+          "text": "Surfaces notable shifts in tracked parameters promptly so timely support can follow."
         },
         {
           "label": "Anywhere",
-          "text": "Monitors people at home, on the move, or in remote locations."
+          "text": "Monitors individuals at home, on the move, or in remote locations through connected devices."
         },
         {
-          "label": "Affordable and creative",
-          "text": "Uses everyday connected hardware and analytics as a practical wellness layer."
+          "label": "Affordable & Creative",
+          "text": "Turns everyday connected hardware and smart analytics into a practical, continuous wellness layer for broader community adoption."
         }
       ],
       "icon": "monitoring",
@@ -130,7 +130,7 @@
   ],
   "gallery": {
     "title": "Gallery",
-    "intro": "Partnerships, hospital visits, seminars, and collaborations.",
+    "intro": "Milestones from partnerships, hospital visits, seminars, and collaborations that shape Zen AI Healthcare.",
     "albums": [
       {
         "id": "china-agreement",
@@ -193,8 +193,8 @@
     ]
   },
   "eventsSection": {
-    "title": "Upcoming event",
-    "intro": "Strategic launch of engineering and AI healthcare technology."
+    "title": "Upcoming Event",
+    "intro": "Join us for the strategic launching of advanced engineering and AI healthcare technology."
   },
   "events": [
     {
@@ -209,15 +209,15 @@
     }
   ],
   "contact": {
-    "title": "Contact",
-    "intro": "Talk with us about bringing these tools to your clinic or community.",
+    "title": "Get in Touch",
+    "intro": "Ready to bring smart, accessible healthcare to your community? Contact us today.",
     "whatsappLabel": "+601112332101 (Whatsapp only)",
     "whatsappUrl": "https://api.whatsapp.com/send/?phone=6001112332101&text&type=phone_number&app_absent=0",
     "email": "rohaizan@zentabib.com",
     "address": "Health and Environment Research Group. UMS Sabah, Malaysia."
   },
   "footer": {
-    "tagline": "AI and health tech for communities: fast, anywhere, affordable, creative.",
+    "tagline": "Advanced AI and health tech, serving communities fast, anywhere, affordably, and creatively.",
     "copyrightName": "Zen AI Healthcare"
   }
 }
