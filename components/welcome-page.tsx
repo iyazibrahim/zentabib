@@ -1,5 +1,6 @@
 'use client';
 
+import SectionBackdrop from '@/components/section-backdrop';
 import { ATMOSPHERES } from '@/lib/atmospheres';
 import type { SiteContent } from '@/lib/content/types';
 import { ServiceIcon, serviceIconColors } from '@/lib/service-icons';
@@ -75,13 +76,13 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
             <nav className="fixed z-50 w-full border-b border-white/10 bg-[#06101f]/80 backdrop-blur-md">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-20 items-center justify-between">
-                        <div className="flex flex-shrink-0 items-center rounded-lg bg-white px-2 py-1">
+                        <Link href="#home" className="flex flex-shrink-0 items-center">
                             <img
-                                src={logoSrc}
+                                src={ATMOSPHERES.seal}
                                 alt="Zen AI Healthcare"
-                                className="h-10 w-auto"
+                                className="h-11 w-11 rounded-full bg-white object-contain p-1"
                             />
-                        </div>
+                        </Link>
 
                         <div className="hidden items-center space-x-8 md:flex">
                             {navLinks.map((link) =>
@@ -140,18 +141,16 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
             </nav>
 
             {sections.hero ? (
-                <section id="home" className="relative overflow-hidden pt-28 pb-24 lg:pt-36 lg:pb-32">
-                    <div className="absolute inset-0 -z-10">
-                        <img
-                            src={ATMOSPHERES.hero}
-                            alt=""
-                            className="h-full w-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-[#04101f]/70" />
-                        <div className="absolute inset-0 bg-gradient-to-b from-[#04101f]/40 via-transparent to-[#04101f]/85" />
-                    </div>
+                <section
+                    id="home"
+                    className="relative overflow-hidden bg-[#04101f] pt-28 pb-24 lg:pt-36 lg:pb-32"
+                >
+                    <SectionBackdrop
+                        src={ATMOSPHERES.hero}
+                        overlayClassName="bg-[#04101f]/72"
+                    />
 
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <motion.div
                             style={{ opacity, scale }}
                             className="mx-auto max-w-4xl text-center"
@@ -161,11 +160,13 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.7 }}
                             >
-                                <img
-                                    src={ATMOSPHERES.seal}
-                                    alt="Zen AI Healthcare"
-                                    className="mx-auto mb-8 h-36 w-36 rounded-full bg-white/95 object-contain p-3 shadow-xl sm:h-44 sm:w-44"
-                                />
+                                <div className="mx-auto mb-8 flex h-40 w-40 items-center justify-center rounded-full bg-white p-4 shadow-xl sm:h-48 sm:w-48">
+                                    <img
+                                        src={logoSrc}
+                                        alt="Zen AI Healthcare"
+                                        className="h-full w-full object-contain"
+                                    />
+                                </div>
                                 <h1 className="mb-6 text-4xl leading-tight font-bold tracking-tight text-white md:text-6xl">
                                     {content.hero.headlineLead}
                                     <br />
@@ -173,7 +174,7 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                                         {content.hero.headlineAccent}
                                     </span>
                                 </h1>
-                                <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-slate-200 md:text-xl">
+                                <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-slate-100 md:text-xl">
                                     {content.hero.subheadline}
                                 </p>
                                 <div className="flex flex-col justify-center gap-4 sm:flex-row">
@@ -185,7 +186,7 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                                     </a>
                                     <a
                                         href="#about"
-                                        className="rounded-full border border-white/30 bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+                                        className="rounded-full border border-stone-200 bg-white px-8 py-4 font-semibold text-stone-800 transition-colors hover:bg-stone-100"
                                     >
                                         {content.hero.secondaryCta}
                                     </a>
@@ -197,16 +198,13 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
             ) : null}
 
             {sections.about || sections.philosophy ? (
-                <section id="about" className="relative overflow-hidden py-24">
-                    <div className="absolute inset-0 -z-10">
-                        <img
-                            src={ATMOSPHERES.about}
-                            alt=""
-                            className="h-full w-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-teal-950/55" />
-                    </div>
-                    <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <section id="about" className="relative overflow-hidden bg-teal-950 py-24">
+                    <SectionBackdrop
+                        src={ATMOSPHERES.about}
+                        className="bg-teal-950"
+                        overlayClassName="bg-teal-950/70"
+                    />
+                    <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         {sections.about ? (
                             <div className="mx-auto mb-14 max-w-3xl text-center">
                                 <h2 className="mb-5 text-3xl font-bold text-white md:text-4xl">
@@ -333,21 +331,18 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
             ) : null}
 
             {sections.gallery ? (
-                <section id="gallery" className="relative overflow-hidden py-24">
-                    <div className="absolute inset-0 -z-10">
-                        <img
-                            src={ATMOSPHERES.gallery}
-                            alt=""
-                            className="h-full w-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-white/78" />
-                    </div>
-                    <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <section id="gallery" className="relative overflow-hidden bg-stone-200 py-24">
+                    <SectionBackdrop
+                        src={ATMOSPHERES.gallery}
+                        className="bg-stone-200"
+                        overlayClassName="bg-white/80"
+                    />
+                    <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="mb-12 text-center">
                             <h2 className="mb-4 text-3xl font-bold text-stone-900 md:text-4xl">
                                 {content.gallery.title}
                             </h2>
-                            <p className="mx-auto max-w-2xl text-lg text-stone-600">
+                            <p className="mx-auto max-w-2xl text-lg text-stone-700">
                                 {content.gallery.intro}
                             </p>
                         </div>
@@ -492,16 +487,13 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
             ) : null}
 
             {sections.contact ? (
-                <section id="contact" className="relative overflow-hidden py-24">
-                    <div className="absolute inset-0 -z-10">
-                        <img
-                            src={ATMOSPHERES.contact}
-                            alt=""
-                            className="h-full w-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-emerald-950/45" />
-                    </div>
-                    <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <section id="contact" className="relative overflow-hidden bg-emerald-950 py-24">
+                    <SectionBackdrop
+                        src={ATMOSPHERES.contact}
+                        className="bg-emerald-950"
+                        overlayClassName="bg-emerald-950/65"
+                    />
+                    <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="mb-14 text-center">
                             <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">
                                 {content.contact.title}

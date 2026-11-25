@@ -1,4 +1,5 @@
 import PublicPageNav from '@/components/public-page-nav';
+import SectionBackdrop from '@/components/section-backdrop';
 import { ATMOSPHERES } from '@/lib/atmospheres';
 import { getServiceBySlug, getSiteContent } from '@/lib/content/store';
 import { ServiceIcon, serviceIconColors } from '@/lib/service-icons';
@@ -37,16 +38,12 @@ export default async function ServicePage({ params }: PageProps) {
         <div className="min-h-screen bg-stone-100 font-sans text-stone-800">
             <PublicPageNav logoSrc={content.brand?.logoSrc ?? '/zen-ai-logo.png'} />
 
-            <div className="relative overflow-hidden pt-28 pb-10">
-                <div className="absolute inset-0 -z-10">
-                    <img
-                        src={ATMOSPHERES.servicePage}
-                        alt=""
-                        className="h-full w-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-[#04101f]/75" />
-                </div>
-                <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <div className="relative overflow-hidden bg-[#04101f] pt-28 pb-10">
+                <SectionBackdrop
+                    src={ATMOSPHERES.servicePage}
+                    overlayClassName="bg-[#04101f]/75"
+                />
+                <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
                     <h1 className="text-3xl font-bold text-white md:text-5xl">{service.title}</h1>
                     {service.tagline ? (
                         <p className="mt-3 text-lg text-emerald-200">{service.tagline}</p>

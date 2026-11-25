@@ -136,25 +136,53 @@
         "id": "china-agreement",
         "title": "Signing agreement in China",
         "order": 1,
-        "photos": []
+        "photos": [
+          {
+            "id": "china-agreement-1",
+            "src": "/gallery/china-agreement.jpg",
+            "caption": "Partnership signing",
+            "order": 1
+          }
+        ]
       },
       {
         "id": "china-hospital-visits",
         "title": "Hospital visits and meetings in China",
         "order": 2,
-        "photos": []
+        "photos": [
+          {
+            "id": "china-hospital-1",
+            "src": "/gallery/hospital-visits.jpg",
+            "caption": "Hospital visit",
+            "order": 1
+          }
+        ]
       },
       {
         "id": "ums-seminar",
         "title": "UMS seminar",
         "order": 3,
-        "photos": []
+        "photos": [
+          {
+            "id": "ums-seminar-1",
+            "src": "/gallery/ums-seminar.jpg",
+            "caption": "UMS seminar session",
+            "order": 1
+          }
+        ]
       },
       {
         "id": "wuzhen-ai-hospital",
         "title": "Wuzhen World First AI Hospital",
         "order": 4,
-        "photos": []
+        "photos": [
+          {
+            "id": "wuzhen-1",
+            "src": "/gallery/wuzhen.jpg",
+            "caption": "Smart AI hospital",
+            "order": 1
+          }
+        ]
       },
       {
         "id": "more-moments",
