@@ -378,7 +378,7 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                         <div className="mt-8 text-center">
                             <Link
                                 href="/gallery"
-                                className="inline-flex rounded-full border border-stone-400 bg-stone-100 px-5 py-2.5 text-sm font-semibold text-stone-900 shadow-sm transition-colors hover:border-emerald-600 hover:bg-white"
+                                className="inline-flex rounded-full border border-stone-300 bg-white px-5 py-2.5 text-sm font-semibold text-stone-800 shadow-sm transition-colors hover:border-emerald-400 hover:bg-emerald-50"
                             >
                                 View all gallery
                             </Link>

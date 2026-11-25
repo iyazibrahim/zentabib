@@ -74,7 +74,7 @@ export default function GalleryCarousel({ photos }: { photos: GalleryCarouselPho
 
     return (
         <div
-            className="relative px-2 sm:px-8"
+            className="relative px-12 sm:px-14"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
         >
@@ -119,7 +119,7 @@ export default function GalleryCarousel({ photos }: { photos: GalleryCarouselPho
                         type="button"
                         onClick={goPrev}
                         aria-label="Previous photos"
-                        className="absolute top-[42%] left-0 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border-2 border-stone-500 bg-white text-stone-900 shadow-md transition-colors hover:border-emerald-600 hover:bg-emerald-50"
+                        className="absolute top-[42%] left-1 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-stone-300 bg-white text-stone-700 shadow-sm transition-colors hover:border-emerald-500 hover:bg-emerald-50 sm:left-2"
                     >
                         <ChevronLeft className="h-5 w-5" />
                     </button>
@@ -127,7 +127,7 @@ export default function GalleryCarousel({ photos }: { photos: GalleryCarouselPho
                         type="button"
                         onClick={goNext}
                         aria-label="Next photos"
-                        className="absolute top-[42%] right-0 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border-2 border-stone-500 bg-white text-stone-900 shadow-md transition-colors hover:border-emerald-600 hover:bg-emerald-50"
+                        className="absolute top-[42%] right-1 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-stone-300 bg-white text-stone-700 shadow-sm transition-colors hover:border-emerald-500 hover:bg-emerald-50 sm:right-2"
                     >
                         <ChevronRight className="h-5 w-5" />
                     </button>
@@ -150,10 +150,10 @@ export function GalleryFilterButton({
         <button
             type="button"
             onClick={onClick}
-            className={`rounded-full border-2 px-4 py-2.5 text-sm font-semibold shadow-sm transition-colors ${
+            className={`rounded-full border px-4 py-2.5 text-sm font-semibold shadow-sm transition-colors ${
                 active
-                    ? 'border-emerald-700 bg-emerald-700 text-white'
-                    : 'border-stone-500 bg-white text-stone-900 hover:border-emerald-600 hover:bg-emerald-50'
+                    ? 'border-emerald-600 bg-emerald-600 text-white'
+                    : 'border-stone-300 bg-white text-stone-800 hover:border-emerald-400 hover:bg-emerald-50'
             }`}
         >
             {children}
