@@ -347,9 +347,11 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                             <h2 className="mb-4 text-3xl font-bold text-stone-900 md:text-4xl">
                                 {content.gallery.title}
                             </h2>
-                            <p className="mx-auto max-w-2xl text-lg text-stone-700">
-                                {content.gallery.intro}
-                            </p>
+                            {content.gallery.intro ? (
+                                <p className="mx-auto max-w-2xl text-lg text-stone-700">
+                                    {content.gallery.intro}
+                                </p>
+                            ) : null}
                         </div>
 
                         <div className="mb-10 flex flex-wrap justify-center gap-3">
@@ -543,7 +545,9 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                                     aria-hidden
                                 />
                                 <h3 className="mb-2 font-semibold text-stone-900">Visit</h3>
-                                <p className="text-stone-600">{content.contact.address}</p>
+                                <p className="whitespace-pre-line text-stone-600">
+                                    {content.contact.address}
+                                </p>
                             </div>
                         </div>
                     </div>

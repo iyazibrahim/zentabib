@@ -130,57 +130,99 @@
   ],
   "gallery": {
     "title": "Gallery",
-    "intro": "Milestones from partnerships, hospital visits, seminars, and collaborations that shape Zen AI Healthcare.",
+    "intro": "",
     "albums": [
       {
-        "id": "china-agreement",
-        "title": "Signing agreement in China",
+        "id": "ip-agreement-signing",
+        "title": "IP holder and Agreement signing",
         "order": 1,
         "photos": [
           {
-            "id": "china-agreement-1",
-            "src": "/gallery/china-agreement.jpg",
-            "caption": "Partnership signing",
+            "id": "ip-signing-flags",
+            "src": "/gallery/ip-signing-flags.png",
+            "caption": "IP holder and agreement signing with Shanghai Mentor and Entrepreneurship Development China",
             "order": 1
           }
         ]
       },
       {
-        "id": "china-hospital-visits",
-        "title": "Hospital visits and meetings in China",
+        "id": "hospital-university-industry",
+        "title": "Hospital, University and industry visit",
         "order": 2,
         "photos": [
           {
-            "id": "china-hospital-1",
-            "src": "/gallery/hospital-visits.jpg",
-            "caption": "Hospital visit",
+            "id": "visit-tcm-rehab",
+            "src": "/gallery/visit-tcm-rehab-center.png",
+            "caption": "TCM Intelligent Rehabilitation Engineering Research Center",
             "order": 1
+          },
+          {
+            "id": "visit-shanghai-design",
+            "src": "/gallery/visit-shanghai-design-institute.jpg",
+            "caption": "Shanghai International Institute of Design and Innovation",
+            "order": 2
+          },
+          {
+            "id": "visit-fudan",
+            "src": "/gallery/visit-fudan-innovation.png",
+            "caption": "Shanghai Innovation Center and Research Institute of Intelligent Industry",
+            "order": 3
+          },
+          {
+            "id": "visit-pmic",
+            "src": "/gallery/visit-pmic-group.png",
+            "caption": "PMIC Big Data Computing Center visit",
+            "order": 4
+          },
+          {
+            "id": "visit-5g-tcm",
+            "src": "/gallery/visit-5g-tcm-meeting.png",
+            "caption": "5G TCM intelligent project meeting",
+            "order": 5
+          },
+          {
+            "id": "visit-demo",
+            "src": "/gallery/visit-demo.png",
+            "caption": "On-site technology demonstration",
+            "order": 6
+          },
+          {
+            "id": "visit-thumbs-up",
+            "src": "/gallery/visit-thumbs-up-group.jpg",
+            "caption": "Partnership visit",
+            "order": 7
           }
         ]
       },
       {
-        "id": "ums-seminar",
-        "title": "UMS seminar",
+        "id": "tcm-seminar-ums",
+        "title": "T&CM Seminar in UMS",
         "order": 3,
         "photos": [
           {
-            "id": "ums-seminar-1",
-            "src": "/gallery/ums-seminar.jpg",
-            "caption": "UMS seminar session",
+            "id": "tcm-seminar-poster",
+            "src": "/gallery/tcm-seminar-poster.jpg",
+            "caption": "Advanced Engineering of Traditional Chinese Medicine Healthcare Industry 2025",
             "order": 1
           }
         ]
       },
       {
         "id": "wuzhen-ai-hospital",
-        "title": "Wuzhen World First AI Hospital",
+        "title": "Wuzen World first AI Hospital",
         "order": 4,
         "photos": [
           {
-            "id": "wuzhen-1",
-            "src": "/gallery/wuzhen.jpg",
-            "caption": "Smart AI hospital",
+            "id": "wuzhen-welcome",
+            "src": "/gallery/wuzhen-hospital-welcome.png",
+            "caption": "Welcome to Wuzen World first AI Hospital",
             "order": 1
+          },
+          {
+            "id": "wuzhen-meeting",
+            "src": "/gallery/wuzhen-hospital-meeting.png",
+            "caption": "Delegation meeting at Wuzen AI Hospital",
+            "order": 2
           }
         ]
       },
@@ -214,7 +256,7 @@
     "whatsappLabel": "+601112332101 (Whatsapp only)",
     "whatsappUrl": "https://api.whatsapp.com/send/?phone=6001112332101&text&type=phone_number&app_absent=0",
     "email": "rohaizan@zentabib.com",
-    "address": "Health and Environment Research Group. UMS Sabah, Malaysia."
+    "address": "Research Group\nLevel 1, Block C, Faculty of Engineering\nUniversiti Malaysia Sabah, Jalan UMS\n88400 Kota Kinabalu, Sabah, Malaysia"
   },
   "footer": {
     "tagline": "Advanced AI and health tech, serving communities fast, anywhere, affordably, and creatively.",
