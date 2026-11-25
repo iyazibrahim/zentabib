@@ -1,5 +1,6 @@
 'use client';
 
+import GalleryCarousel, { GalleryFilterButton } from '@/components/gallery-carousel';
 import SectionBackdrop from '@/components/section-backdrop';
 import { ATMOSPHERES } from '@/lib/atmospheres';
 import type { SiteContent } from '@/lib/content/types';
@@ -354,64 +355,34 @@ export default function WelcomePage({ content }: { content: SiteContent }) {
                             ) : null}
                         </div>
 
-                        <div className="mb-10 flex flex-wrap justify-center gap-3">
-                            <button
-                                type="button"
+                        <div className="mb-8 flex flex-wrap justify-center gap-3">
+                            <GalleryFilterButton
+                                active={activeAlbumId === 'all'}
                                 onClick={() => setActiveAlbumId('all')}
-                                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                                    activeAlbumId === 'all'
-                                        ? 'bg-emerald-600 text-white'
-                                        : 'bg-white text-stone-700 hover:bg-stone-100'
-                                }`}
                             >
                                 All
-                            </button>
+                            </GalleryFilterButton>
                             {albums.map((album) => (
-                                <button
+                                <GalleryFilterButton
                                     key={album.id}
-                                    type="button"
+                                    active={activeAlbumId === album.id}
                                     onClick={() => setActiveAlbumId(album.id)}
-                                    className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                                        activeAlbumId === album.id
-                                            ? 'bg-emerald-600 text-white'
-                                            : 'bg-white text-stone-700 hover:bg-stone-100'
-                                    }`}
                                 >
                                     {album.title}
-                                </button>
+                                </GalleryFilterButton>
                             ))}
                         </div>
 
-                        {galleryPhotos.length === 0 ? (
-                            <div className="rounded-2xl border border-dashed border-stone-300 bg-white/80 px-6 py-16 text-center">
-                                <p className="text-stone-600">No photos yet</p>
-                            </div>
-                        ) : (
-                            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                                {galleryPhotos.map((photo) => (
-                                    <figure
-                                        key={photo.id}
-                                        className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm"
-                                    >
-                                        <img
-                                            src={photo.src}
-                                            alt={photo.caption || photo.albumTitle}
-                                            className="h-56 w-full object-cover"
-                                        />
-                                        <figcaption className="space-y-1 p-4">
-                                            <p className="text-sm font-medium text-emerald-700">
-                                                {photo.albumTitle}
-                                            </p>
-                                            {photo.caption ? (
-                                                <p className="text-sm text-stone-600">
-                                                    {photo.caption}
-                                                </p>
-                                            ) : null}
-                                        </figcaption>
-                                    </figure>
-                                ))}
-                            </div>
-                        )}
+                        <GalleryCarousel photos={galleryPhotos} />
+
+                        <div className="mt-8 text-center">
+                            <Link
+                                href="/gallery"
+                                className="inline-flex rounded-full border border-stone-400 bg-stone-100 px-5 py-2.5 text-sm font-semibold text-stone-900 shadow-sm transition-colors hover:border-emerald-600 hover:bg-white"
+                            >
+                                View all gallery
+                            </Link>
+                        </div>
                     </div>
                 </section>
             ) : null}
