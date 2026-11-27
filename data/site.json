@@ -185,12 +185,6 @@
             "src": "/gallery/visit-demo.png",
             "caption": "On-site technology demonstration",
             "order": 6
-          },
-          {
-            "id": "visit-thumbs-up",
-            "src": "/gallery/visit-thumbs-up-group.jpg",
-            "caption": "Partnership visit",
-            "order": 7
           }
         ]
       },
@@ -204,6 +198,42 @@
             "src": "/gallery/tcm-seminar-poster.jpg",
             "caption": "Advanced Engineering of Traditional Chinese Medicine Healthcare Industry 2025",
             "order": 1
+          },
+          {
+            "id": "ums-seminar-speaker",
+            "src": "/gallery/ums-seminar-speaker.png",
+            "caption": "Speaker at the T&CM Seminar in UMS",
+            "order": 2
+          },
+          {
+            "id": "ums-seminar-imaging-demo",
+            "src": "/gallery/ums-seminar-imaging-demo.png",
+            "caption": "On-site imaging demonstration",
+            "order": 3
+          },
+          {
+            "id": "ums-seminar-auditorium",
+            "src": "/gallery/ums-seminar-auditorium.jpg",
+            "caption": "Participants at the T&CM Seminar in UMS",
+            "order": 4
+          },
+          {
+            "id": "ums-seminar-device-demo",
+            "src": "/gallery/ums-seminar-device-demo.jpg",
+            "caption": "Hands-on technology demonstration",
+            "order": 5
+          },
+          {
+            "id": "ums-seminar-inquiry",
+            "src": "/gallery/ums-seminar-inquiry.png",
+            "caption": "Inquiry diagnosis collection demonstration",
+            "order": 6
+          },
+          {
+            "id": "ums-seminar-group",
+            "src": "/gallery/ums-seminar-group.png",
+            "caption": "Group photo at the T&CM Seminar in UMS",
+            "order": 7
           }
         ]
       },
@@ -223,6 +253,24 @@
             "src": "/gallery/wuzhen-hospital-meeting.png",
             "caption": "Delegation meeting at Wuzen AI Hospital",
             "order": 2
+          },
+          {
+            "id": "wuzhen-exterior",
+            "src": "/gallery/wuzhen-hospital-exterior.jpg",
+            "caption": "Arrival at Wuzen World first AI Hospital",
+            "order": 3
+          },
+          {
+            "id": "wuzhen-team",
+            "src": "/gallery/wuzhen-hospital-team.jpg",
+            "caption": "Delegation with the Wuzen hospital team",
+            "order": 4
+          },
+          {
+            "id": "visit-thumbs-up",
+            "src": "/gallery/visit-thumbs-up-group.jpg",
+            "caption": "Partnership visit at Wuzen AI Hospital",
+            "order": 5
           }
         ]
       },
